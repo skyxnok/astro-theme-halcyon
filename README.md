@@ -1,63 +1,52 @@
-# Astro Starter Kit: Blog
+# 我的博客
 
-```sh
-npm create astro@latest -- --template blog
-```
+基于 [Astro](https://astro.build/) 构建的个人博客，使用 Markdown / MDX 写作。
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 功能特性
 
-Features:
+- 极简风格，Lighthouse 满分表现
+- SEO 友好：canonical URL 与 Open Graph
+- 站点地图（sitemap）与 RSS 订阅
+- Markdown & MDX 内容集合
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and Open Graph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## 项目结构
 
 ```text
-├── public/
+├── public/              # 静态资源
 ├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
+│   ├── assets/          # 图片等资源
+│   ├── components/      # 组件（Header、Footer 等）
+│   ├── content/blog/    # 博客文章（.md / .mdx）
+│   ├── layouts/         # 页面布局
+│   └── pages/           # 页面路由
 ├── astro.config.mjs
-├── README.md
 ├── package.json
 └── tsconfig.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 写文章
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+在 `src/content/blog/` 下新建 `.md` 或 `.mdx` 文件，并在 frontmatter 中填写标题和日期即可，例如：
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+```md
+---
+title: '我的第一篇文章'
+description: '文章简介'
+pubDate: '2026-08-06'
+---
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+## 常用命令
 
-## 🧞 Commands
+| 命令                   | 作用                                     |
+| :--------------------- | :--------------------------------------- |
+| `npm run dev`          | 启动本地开发服务器（`localhost:4321`）   |
+| `npm run build`        | 构建生产站点到 `./dist/`                 |
+| `npm run preview`      | 本地预览构建产物                         |
+| `npm run astro --help` | 查看 Astro CLI 帮助                      |
 
-All commands are run from the root of the project, from a terminal:
+## 部署前记得
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+- 在 `astro.config.mjs` 中把 `site` 改成你的正式域名
+- 在 `src/consts.ts` 中修改站点标题和描述
+- 在 `src/pages/about.astro` 中完善关于页
