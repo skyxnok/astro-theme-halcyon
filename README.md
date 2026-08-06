@@ -2,6 +2,14 @@
 
 基于 [Astro](https://astro.build/) 构建的个人博客主题，使用 Markdown / MDX 写作，静态构建后可部署到任意平台。
 
+## 声明与致谢
+
+本项目（Halcyon）是个人博客主题，基于 [Firefly](https://github.com/CuteLeaf/Firefly) 二次开发；Firefly 又基于 [Fuwari](https://github.com/saicaca/fuwari) 二次开发。
+
+在此感谢两位原作者 [saicaca](https://github.com/saicaca)（Fuwari）与 [CuteLeaf](https://github.com/CuteLeaf)（Firefly）的开源贡献。
+
+本项目遵循 [MIT License](LICENSE)，`LICENSE` 中保留了原作者的版权声明。
+
 ## 功能特性
 
 - 左右侧边栏、文章列表 / 卡片 / 瀑布流布局
