@@ -1,25 +1,25 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
+
+import { getEntry, render } from "astro:content";
+import Markdown from "@components/common/Markdown.astro";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+
+const aboutPost = await getEntry("spec", "about");
+
+if (!aboutPost) {
+	throw new Error("About page content not found");
+}
+
+const { Content } = await render(aboutPost);
 ---
-
-<Layout
-	title="关于我"
-	description="关于这个博客和它的作者"
-	pubDate={new Date('2026-08-06')}
-	heroImage={AboutHeroImage}
->
-	<p>你好！我是这个博客的作者。这里是我记录和分享的地方。</p>
-
-	<p>这个博客主要分享：</p>
-	<ul>
-		<li>编程与技术学习笔记</li>
-		<li>项目实战经验</li>
-		<li>读书与生活随笔</li>
-	</ul>
-
-	<p>
-		博客使用 Astro 构建，内容以 Markdown 编写，源码托管在 Git 仓库中。
-		如果你对我的文章有任何想法，欢迎通过评论区或邮件与我交流。
-	</p>
-</Layout>
+<MainGridLayout title={i18n(I18nKey.about)} description={i18n(I18nKey.about)}>
+    <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32">
+        <div class="card-base z-10 px-9 py-6 relative w-full ">
+            <Markdown class="mt-2">
+                <Content />
+            </Markdown>
+        </div>
+    </div>
+</MainGridLayout>
