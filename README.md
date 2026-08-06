@@ -101,3 +101,9 @@ comment: true            # 可选，是否允许评论
 2. 更新 `public/favicon/` 下的站点图标
 
 项目内置 `@astrojs/cloudflare` 适配器，如需部署到 Cloudflare Workers，构建时设置环境变量 `CF_WORKERS=1` 即可。
+
+详细部署教程：
+
+- [Vercel 部署教程](docs/deploy-vercel.md)
+- [Cloudflare 部署教程](docs/deploy-cloudflare.md)
+- [GitHub Pages 部署教程](docs/deploy-github-pages.md)

@@ -21,5 +21,8 @@
   "public:images/mac-wechat-dual-open/02-创建证书基本信息.png": "e3e3e5e9ebefeaeaeb",
   "public:images/mac-wechat-dual-open/01-钥匙串证书列表.png": "eeeeedf8f8f8f8f9f9",
   "public:images/covers/mac-wechat-dual-open.jpg": "f4e9e1e8d7c8e2d3bf",
-  "public:images/covers/hello-world.jpg": "be9a96cda8abbf9294"
+  "public:images/covers/hello-world.jpg": "be9a96cda8abbf9294",
+  "public:images/covers/vercel-deploy.jpg": "a4acbd937775876574",
+  "public:images/covers/github-pages-deploy.jpg": "a79181887e7ba8a3a7",
+  "public:images/covers/cloudflare-deploy.jpg": "be959ab38082a96b7c"
 }
