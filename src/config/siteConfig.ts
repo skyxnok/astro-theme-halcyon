@@ -12,7 +12,7 @@ export const siteConfig: SiteConfig = {
 	subtitle: "",
 
 	// 站点 URL
-	site_url: "https://201562.xyz",
+	site_url: "https://201562.xyz/",
 
 	// 站点描述
 	description: "记录学习、生活与思考的个人博客，使用 Astro 构建。",
