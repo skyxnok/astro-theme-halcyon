@@ -1,0 +1,183 @@
+@font-face {
+  font-family: "halcyon"; /* Project id 4995228 */
+  src: 
+       url('../assets/fonts/iconfont/iconfont.woff2') format('woff2'),
+       url('../assets/fonts/iconfont/iconfont.woff') format('woff'),
+       url('../assets/fonts/iconfont/iconfont.ttf') format('truetype');
+}
+
+.halcyon {
+  font-family: "halcyon" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.i-xinxi:before {
+  content: "\e858";
+}
+
+.i-book:before {
+  content: "\e62c";
+}
+
+.i-email:before {
+  content: "\e8c3";
+}
+
+.i-tag:before {
+  content: "\e603";
+}
+
+.i-yinghua:before {
+  content: "\e624";
+}
+
+.i-time:before {
+  content: "\e688";
+}
+
+.i-pen:before {
+  content: "\e98a";
+}
+
+.i-date:before {
+  content: "\eb9b";
+}
+
+.i-feather:before {
+  content: "\e635";
+}
+
+.i-sun:before {
+  content: "\e623";
+}
+
+.i-bgcode:before {
+  content: "\e604";
+}
+
+.i-qq:before {
+  content: "\e640";
+}
+
+.i-moon:before {
+  content: "\e641";
+}
+
+.i-house:before {
+  content: "\e617";
+}
+
+.i-x-twitter:before {
+  content: "\e618";
+}
+
+.i-twitter:before {
+  content: "\e619";
+}
+
+.i-user:before {
+  content: "\e61a";
+}
+
+.i-location:before {
+  content: "\e61b";
+}
+
+.i-facebook:before {
+  content: "\e61c";
+}
+
+.i-weixin:before {
+  content: "\e61d";
+}
+
+.i-google:before {
+  content: "\e61e";
+}
+
+.i-archive:before {
+  content: "\e61f";
+}
+
+.i-id:before {
+  content: "\e620";
+}
+
+.i-star-solid-full:before {
+  content: "\e621";
+}
+
+.i-gitlab:before {
+  content: "\e606";
+}
+
+.i-search:before {
+  content: "\e622";
+}
+
+.i-tags-solid-full:before {
+  content: "\e608";
+}
+
+.i-youtube:before {
+  content: "\e60a";
+}
+
+.i-discord:before {
+  content: "\e609";
+}
+
+.i-redbook:before {
+  content: "\e60b";
+}
+
+.i-heart:before {
+  content: "\e607";
+}
+
+.i-music:before {
+  content: "\e60c";
+}
+
+.i-chart:before {
+  content: "\e60d";
+}
+
+.i-github:before {
+  content: "\e60e";
+}
+
+.i-telegram:before {
+  content: "\e60f";
+}
+
+.i-plane:before {
+  content: "\e610";
+}
+
+.i-envelope:before {
+  content: "\e611";
+}
+
+.i-tiktok:before {
+  content: "\e612";
+}
+
+.i-weibo:before {
+  content: "\e613";
+}
+
+.i-bilibili:before {
+  content: "\e614";
+}
+
+.i-light:before {
+  content: "\e615";
+}
+
+.i-instagram:before {
+  content: "\e616";
+}
