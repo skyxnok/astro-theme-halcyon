@@ -54,7 +54,7 @@ export async function GET(context: APIContext) {
 		title: siteConfig.title,
 		description: siteConfig.subtitle || "No description",
 		site: context.site ?? siteConfig.site_url,
-		customData: `<templateTheme>Firefly</templateTheme>
+		customData: `<templateTheme>halcyon</templateTheme>
 		<templateThemeVersion>${pkg.version}</templateThemeVersion>
 		<lastBuildDate>${formatDateI18nWithTime(new Date())}</lastBuildDate>`,
 		items: feedItems,

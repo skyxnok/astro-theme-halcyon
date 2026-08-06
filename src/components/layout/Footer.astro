@@ -1,6 +1,7 @@
 ---
 import fs from "node:fs";
 import path from "node:path";
+import { Icon } from "astro-icon/components";
 import { footerConfig, profileConfig } from "@/config";
 import { url } from "@/utils/url-utils";
 
@@ -40,24 +41,23 @@ if (footerConfig.enable) {
     </div>
     <div class="m-0.5">
       &copy; <span id="copyright-year">{currentYear}</span>
-      {profileConfig.name}. All Rights Reserved. /
-      <a
-        class="transition link text-(--primary) font-medium"
-        target="_blank"
-        href={url("rss.xml")}>RSS</a
-      > /
-      <a
-        class="transition link text-(--primary) font-medium"
-        target="_blank"
-        href={url("sitemap-index.xml")}>Sitemap</a
-      >
+      {profileConfig.name}
+        <span class="with-love"><Icon name="local:sakura" class="rotate text-[1.2rem]" /></span>
+      <a 
+      class="text-(--primary)"
+      href="https://icp.gov.moe/?keyword=20260263"  target="_blank">萌ICP备20260263号</a>. 
+      
     </div>
     <div class="m-0.5">
       Powered by
       <a
-        class="transition link text-(--primary) font-medium"
+        class="text-(--primary) font-medium"
         target="_blank"
-        href="https://astro.build">Astro</a
+        href="https://astro.build"> Astro</a
+      >｜ Theme.<a
+        class="text-(--primary) font-medium"
+        target="_blank"
+        href="https://github.com/skyxnok/astro-theme-halcyon">Halcyon</a
       >
     </div>
   </div>

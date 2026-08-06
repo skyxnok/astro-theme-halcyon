@@ -6,6 +6,7 @@ description: 我的第一篇博客文章，欢迎来到我的小天地。
 tags: [随笔]
 category: 随笔
 draft: false
+image: /images/covers/hello-world.jpg
 ---
 
 这是我的第一篇博客文章。

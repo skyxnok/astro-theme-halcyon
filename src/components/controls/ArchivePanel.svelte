@@ -1,6 +1,7 @@
 <script lang="ts">
 import { onMount } from "svelte";
 
+import Icon from "@/components/common/Icon.svelte";
 import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
 import { getPostUrlBySlug } from "@/utils/url-utils";
@@ -73,13 +74,8 @@ function formatDate(date: Date) {
 	return `${month}-${day}`;
 }
 
-function formatTag(tagList: string[]) {
-	return tagList.map((t) => `#${t}`).join(" ");
-}
-
 function formatFilterValues(filter: ActiveFilter) {
-	const prefix = filter.labelKey === I18nKey.tags ? "#" : "";
-	return filter.values.map((value) => `${prefix}${value}`).join(" / ");
+	return filter.values.join(" / ");
 }
 
 function resolvePrimaryFilter(filters: ActiveFilter[]) {
@@ -183,7 +179,7 @@ onMount(async () => {
 		} else if (uncategorized) {
 			newTitle = i18n(I18nKey.uncategorized);
 		} else if (tags.length > 0) {
-			newTitle = tags.map((t) => `#${t}`).join(" / ");
+			newTitle = tags.join(" / ");
 		}
 		if (newTitle && bannerTitle.textContent !== newTitle) {
 			bannerTitle.style.opacity = "0";
@@ -204,7 +200,12 @@ onMount(async () => {
 					<a href={primaryFilter.labelKey === I18nKey.categories ? '/categories/' : '/tags/'}
 					   class="text-50 hover:text-(--primary) transition-colors">{i18n(primaryFilter.labelKey)}</a>
 					<span class="mx-2 text-30">/</span>
-					<span class="font-semibold text-(--primary)">{formatFilterValues(primaryFilter)}</span>
+					<span class="inline-flex items-center font-semibold text-(--primary)">
+						{#if primaryFilter.labelKey === I18nKey.tags}
+							<Icon icon="local:tag-rounded" size="sm" class="shrink-0 mr-1" />
+						{/if}
+						{formatFilterValues(primaryFilter)}
+					</span>
 					{#if secondaryFilters.length > 0}
 						<span class="ml-2 text-50">· {formatFilterSummary(secondaryFilters)}</span>
 					{/if}
@@ -292,7 +293,12 @@ onMount(async () => {
 								class="hidden md:block md:w-[15%] text-left text-sm transition
                      whitespace-nowrap text-ellipsis overflow-hidden text-30"
 						>
-							{formatTag(post.data.tags)}
+							{#each post.data.tags as tag}
+								<span class="inline-flex items-center gap-1 mr-2">
+									<Icon icon="local:tag-rounded" size="sm" class="shrink-0" />
+									{tag}
+								</span>
+							{/each}
 						</div>
 					</div>
 				</a>

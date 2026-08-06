@@ -5,10 +5,10 @@ import type { FriendLink, FriendsPageConfig } from "../types/friendsConfig";
 // 友链页面配置
 export const friendsPageConfig: FriendsPageConfig = {
 	// 页面标题，如果留空则使用 i18n 中的翻译
-	title: "",
+	title: "SkyのXnok的友链",
 
 	// 页面描述文本，如果留空则使用 i18n 中的翻译
-	description: "",
+	description: "欢迎来到我的友链页面！这里展示了我与其他博客和网站的友好连接。",
 
 	// 是否显示底部自定义内容（friends.mdx 中的内容）
 	showCustomContent: true,

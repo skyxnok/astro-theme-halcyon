@@ -1,0 +1,47 @@
+/* 社交链接 hover 反白效果（保持原有按钮大小） */
+.social-item {
+	position: relative;
+	overflow: hidden;
+}
+
+.social-item svg {
+	position: relative;
+	z-index: 1;
+}
+
+/* 填充层：斜向方块扫入，方块放大到 1.5 倍并居中，保证完整覆盖图标 */
+.social-item::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	transform: translate(-200%, 200%) rotate(45deg) scale(1.5);
+	transition: transform 0.35s cubic-bezier(0.31, -0.105, 0.43, 1.59);
+}
+
+.social-item svg {
+	transition: color 0.35s ease;
+}
+
+.social-item:hover::before,
+.social-item:focus::before {
+	transform: translate(0, 0) rotate(45deg) scale(1.5);
+}
+
+.social-item:hover svg,
+.social-item:focus svg {
+	color: var(--page-bg);
+}
+
+/* 品牌填充色 */
+.social-item.rss::before {
+	background-color: #f26522;
+}
+.social-item.github::before {
+	background-color: #191717;
+}
+.social-item.bilibili::before {
+	background-color: #fa678e;
+}
+.social-item.email::before {
+	background-color: #55acd5;
+}

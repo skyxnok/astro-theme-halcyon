@@ -56,7 +56,7 @@ const adapter = process.env.CF_WORKERS
 // https://astro.build/config
 export default defineConfig({
 	site: siteConfig.site_url,
-
+	devToolbar: { enabled: false },
 	base: "/",
 	trailingSlash: "always",
 
@@ -262,7 +262,7 @@ export default defineConfig({
 		plugins: [tailwindcss()],
 		server: {
 			watch: {
-				ignored: ["**/package/**", "**/Firefly-docs/**"],
+				ignored: ["**/package/**", "**/halcyon-docs/**"],
 			},
 		},
 		resolve: {

@@ -141,12 +141,18 @@ const descriptionText = description || remarkPluginFrontmatter.excerpt || "";
                 class="btn-regular h-6 text-xs px-2 py-1 rounded-md
                          transition-all duration-200 hover:scale-105 active:scale-95"
               >
-                #{tag.trim()}
+                <span class="inline-flex items-center gap-1">
+                  <Icon name="tag-rounded" is:inline class="shrink-0" />
+                  {tag.trim()}
+                </span>
               </a>
             ))}
           {!(tags && tags.length > 0) && (
             <span class="text-(--content-meta) text-xs">
-              #{i18n(I18nKey.noTags)}
+              <span class="inline-flex items-center gap-1">
+                <Icon name="tag-rounded" is:inline class="shrink-0" />
+                {i18n(I18nKey.noTags)}
+              </span>
             </span>
           )}
         </div>

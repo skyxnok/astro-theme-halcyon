@@ -98,7 +98,7 @@ export const LinkPresets: Record<string, NavBarLink> = {
 	Tags: {
 		name: "标签",
 		url: "/tags/",
-		icon: "material-symbols:tag-rounded",
+		icon: "tag-rounded",
 	},
 	Friends: {
 		name: "友链",

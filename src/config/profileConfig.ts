@@ -33,5 +33,17 @@ export const profileConfig: ProfileConfig = {
 			url: "https://github.com/skyxnok",
 			showName: false,
 		},
+		{
+			name: "Bilibili",
+			icon: "fa7-brands:bilibili",
+			url: "https://space.bilibili.com/389602601",
+			showName: false,
+		},
+		{
+			name: "email",
+			icon: "fa7-solid:envelope",
+			url: "mailto:skyxnok@201562.xyz",
+			showName: false,
+		},
 	],
 };

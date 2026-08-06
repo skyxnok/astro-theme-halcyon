@@ -1,7 +1,4 @@
 ---
-import Live2DWidget from "@components/features/Live2DWidget.astro";
-
-import SpineModel from "@components/features/SpineModel.astro";
 import Footer from "@components/layout/Footer.astro";
 import Navbar from "@components/layout/Navbar.astro";
 import SideBar from "@components/layout/SideBar.astro";
@@ -12,12 +9,7 @@ import FloatingControls from "@/components/controls/FloatingControls.astro";
 import ScrollDownIndicator from "@/components/controls/ScrollDownIndicator.astro";
 import TypewriterText from "@/components/features/TypewriterText.astro";
 import CategoryBar from "@/components/layout/CategoryBar.astro";
-import {
-	backgroundWallpaper,
-	live2dWidgetConfig,
-	sidebarLayoutConfig,
-	siteConfig,
-} from "@/config";
+import { backgroundWallpaper, sidebarLayoutConfig, siteConfig } from "@/config";
 import {
 	BANNER_HEIGHT,
 	BANNER_HEIGHT_EXTEND,
@@ -254,7 +246,7 @@ const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
 const stickyNavbar = siteConfig.navbar.stickyNavbar ?? false;
 
 // 获取图片质量配置
-const configQuality = getImageQuality();
+const configQuality = Math.min(getImageQuality() + 10, 95);
 const mobileQuality = Math.round(configQuality * 0.9);
 const bannerCarouselEnabledDefault =
 	backgroundWallpaper.banner?.carousel?.enable ?? false;
@@ -663,7 +655,7 @@ const bannerCarouselInterval = Math.max(
             <div class="w-4/5 lg:w-3/4 text-center mb-0">
                 <div class="flex flex-col">
                     {backgroundWallpaper.common?.homeText?.title && (
-                        <div class="banner-title font-bold text-white mb-2 lg:mb-4 leading-tight" style={{ '--banner-title-size': backgroundWallpaper.common.homeText.titleSize || "3rem" }}>
+                        <div class="banner-title text-white mb-2 lg:mb-4" style={{ '--banner-title-size': backgroundWallpaper.common.homeText.titleSize || "3.5em" }}>
                             {backgroundWallpaper.common.homeText.title}
                         </div>
                     )}
@@ -700,11 +692,11 @@ const bannerCarouselInterval = Math.max(
                 if (Array.isArray(subtitles) && subtitles.length > 0 && !subtitleElement.querySelector('.typewriter')) {
                     // Use a global variable to persist the subtitle across Swup navigations
                     // This variable will be reset on full page reload (F5), meeting the requirement
-                    if (!window.fireflyCachedSubtitle) {
+                    if (!window.halcyonCachedSubtitle) {
                         const randomIndex = Math.floor(Math.random() * subtitles.length);
-                        window.fireflyCachedSubtitle = subtitles[randomIndex];
+                        window.halcyonCachedSubtitle = subtitles[randomIndex];
                     }
-                    subtitleElement.textContent = window.fireflyCachedSubtitle;
+                    subtitleElement.textContent = window.halcyonCachedSubtitle;
                 }
             } catch (e) {
                 console.error("Failed to parse subtitles", e);
@@ -937,8 +929,6 @@ const bannerCarouselInterval = Math.max(
             </div>
         </div>
 
-        <SpineModel></SpineModel>
-        {live2dWidgetConfig.enable && <Live2DWidget config={live2dWidgetConfig} />}
     </div>
 </div>
 
@@ -964,4 +954,3 @@ const bannerCarouselInterval = Math.max(
   }
 
 </style>
-

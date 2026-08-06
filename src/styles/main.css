@@ -2,6 +2,7 @@
 @import './layout-styles.css';
 @import './navbar.css';
 @import './banner-title.css';
+@import './social.css';
 @import './waves.css';
 @import './transition.css'; 
 @import './custom-scrollbar.css';
@@ -14,6 +15,7 @@
 
 /* Tailwind v4 配置 - 从 tailwind.config.cjs 迁移 */
 @theme {
+  --font-family-logo: 'Fredericka', 'Fredericka the Great', cursive;
   --font-sans:
     'Roboto', 'sans-serif', ui-sans-serif, system-ui, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -148,8 +150,6 @@ html {
     /* 禁用复杂选择器元素的过渡 - 仅在非 View Transitions 模式下 */
     .is-theme-transitioning:not(.use-view-transition) .float-panel,
     .is-theme-transitioning:not(.use-view-transition) .float-panel *,
-    .is-theme-transitioning:not(.use-view-transition) .music-player,
-    .is-theme-transitioning:not(.use-view-transition) .music-player *,
     .is-theme-transitioning:not(.use-view-transition) .widget,
     .is-theme-transitioning:not(.use-view-transition) .widget *,
     .is-theme-transitioning:not(.use-view-transition) .dropdown-content,
@@ -575,4 +575,25 @@ html {
 /* 分页信息样式 */
 .pagination-info {
   @apply text-sm text-(--text-secondary) text-center mb-2;
+}
+
+/* 页脚樱花图标（参考站 with-love） */
+.with-love {
+	color: #ffc0cb;
+	display: inline-block;
+	margin: 0 0.3125rem 0 0.125rem;
+	vertical-align: middle;
+}
+
+.with-love .rotate {
+	animation: rotate 6s linear infinite;
+}
+
+@keyframes rotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }

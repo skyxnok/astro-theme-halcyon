@@ -83,11 +83,6 @@
     top: auto !important;
   }
   
-  /* 移动端组件简化显示 */
-  .widget-container[data-widget-type="announcement"] {
-    order: -1; /* 公告优先显示 */
-  }
-  
   .widget-container[data-widget-type="categories"],
   .widget-container[data-widget-type="tags"] {
     /* 分类和标签在移动端可折叠 */
@@ -183,19 +178,6 @@
 @media (max-width: 767px) {
   .widget-container[data-widget-type="profile"] {
     min-height: 100px;
-  }
-}
-
-/* Announcement 组件 */
-.widget-container[data-widget-type="announcement"] {
-  /* 公告组件可以动态调整高度 */
-  min-height: 80px;
-}
-
-@media (max-width: 767px) {
-  .widget-container[data-widget-type="announcement"] {
-    min-height: 60px;
-    font-size: 0.875rem;
   }
 }
 

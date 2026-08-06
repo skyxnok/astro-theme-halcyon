@@ -1,6 +1,6 @@
 # 📦 Components 组件目录
 
-Firefly 项目中所有可复用组件的集中管理。组件按照功能和职责进行分类，提供清晰的架构和易于维护的代码组织。
+halcyon 项目中所有可复用组件的集中管理。组件按照功能和职责进行分类，提供清晰的架构和易于维护的代码组织。
 
 ## 📁 目录结构
 
@@ -33,12 +33,9 @@ Firefly 项目中所有可复用组件的集中管理。组件按照功能和职
 
 **交互组件**
 - `ArchivePanel.svelte` - 归档面板组件
-- `DisplaySettings.svelte` - 显示设置组件
 - `DisplaySettingsIntegrated.svelte` - 集成显示设置组件
-- `LayoutSwitchButton.svelte` - 布局切换按钮
 - `LightDarkSwitch.svelte` - 主题切换组件
 - `Search.svelte` - 搜索功能组件
-- `WallpaperSwitch.svelte` - 壁纸模式切换组件
 
 ### 🔧 common/ - 公共可复用组件
 
@@ -57,8 +54,6 @@ Firefly 项目中所有可复用组件的集中管理。组件按照功能和职
 - `CoverImage.astro` - 封面图组件（支持本地图片和随机图API）
 - `ImageWrapper.astro` - 图片包装器（支持本地和远程图片）
 - `Markdown.astro` - Markdown 内容样式包装器
-- `PioMessageBox.astro` - 消息框组件（Live2D/Spine 消息显示）
-
 **分页组件**
 - `ClientPagination.svelte` - 客户端分页（JavaScript 控制）
 - `Pagination.astro` - 静态路由分页（Astro 原生）
@@ -67,16 +62,12 @@ Firefly 项目中所有可复用组件的集中管理。组件按照功能和职
 
 侧边栏中使用的各种功能小部件。
 
-- `Advertisement.astro` - 广告组件
-- `Announcement.astro` - 公告组件
 - `Calendar.astro` - 日历组件
 - `Categories.astro` - 分类组件
-- `Music.astro` - 音乐播放器小部件
 - `Profile.astro` - 个人信息/社交链接小部件
 - `SidebarTOC.astro` - 侧边栏目录组件
 - `SiteInfo.astro` - 站点信息组件
 - `SiteStats.astro` - 站点统计组件
-- `SpineModel.astro` - Spine 看板娘组件
 - `Tags.astro` - 标签组件
 
 ### ✨ features/ - 全局功能特效组件
@@ -87,15 +78,11 @@ Firefly 项目中所有可复用组件的集中管理。组件按照功能和职
 - `FancyboxManager.astro` - Fancybox 图片查看器管理
 - `FontManager.astro` - 字体加载和管理
 - `KatexManager.astro` - Katex 数学公式渲染管理
-- `MusicManager.astro` - 全局音乐播放管理器（单例，管理唯一 audio 元素和播放状态，通过 CustomEvent 同步所有 MusicPlayer 视图实例）
 
 **功能组件**
 - `EncryptedContent.astro` - 加密内容组件
 - `EncryptedPost.astro` - 加密文章组件
-- `Live2DWidget.astro` - Live2D 看板娘组件
-- `MusicPlayer.astro` - 音乐播放器 UI 视图控制器（纯 UI，委托 MusicManager 进行播放控制）
 - `SakuraEffect.astro` - 樱花飘落特效
-- `SpineModel.astro` - Spine 看板娘组件
 - `TypewriterText.astro` - 打字机动画效果
 
 ### 📃 pages/ - 页面特定组件
@@ -126,15 +113,6 @@ Firefly 项目中所有可复用组件的集中管理。组件按照功能和职
 - `Twikoo.astro` - Twikoo 评论集成
 - `Waline.astro` - Waline 评论集成
 
-### 📊 analytics/ - 数据统计组件
-
-网站分析和统计集成组件。
-
-- `GoogleAnalytics.astro` - Google Analytics
-- `La51Analytics.astro` - 51la 统计
-- `MicrosoftClarity.astro` - Microsoft Clarity
-- `UmamiAnalytics.astro` - Umami 统计
-
 ### 🔧 misc/ - 杂项工具组件
 
 其他辅助和工具类组件。
@@ -156,5 +134,4 @@ Firefly 项目中所有可复用组件的集中管理。组件按照功能和职
 | **features/** | 全局功能特效 | 全局加载的增强功能 |
 | **pages/** | 页面特定组件 | 仅在特定页面使用 |
 | **comment/** | 评论系统 | 第三方服务集成 |
-| **analytics/** | 数据统计 | 分析和统计服务 |
 | **misc/** | 工具和辅助 | 其他杂项功能 |

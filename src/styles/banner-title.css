@@ -1,12 +1,35 @@
 /* 横幅文字阴影 - 更柔和的扩散效果 */
+/* 横幅主标题字体 - 本地 Fredericka the Great */
+@font-face {
+    font-family: "Fredericka";
+    src: url("../assets/fonts/FrederickatheGreat.woff2") format("woff2");
+    font-display: swap;
+}
+
+/* 参考站 html 固定 16px，本主题手机端根字号为 14px。
+   钉死横幅文字容器的字号，让标题的 em 在所有屏幕上都以 16px 计算，
+   保证桌面/平板/手机字号一致（3.5em = 56px）。 */
+.banner-home-text-overlay {
+    font-size: 16px;
+}
+
 .banner-title {
-    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+    /* 与参考站 #brand .artboard 完全一致：Fredericka 常规字重、3.5em、行高1.2、无阴影 */
+    font-family: var(--font-family-logo) !important;
+    font-weight: normal !important;
+    font-size: var(--banner-title-size, 3.5em) !important;
+    line-height: 1.2 !important;
+    text-shadow: none !important;
     /* 防止大字体标题溢出容器 */
     overflow-wrap: break-word;
     word-break: break-word;
-    /* 响应式字体大小：取用户配置值与视口宽度10%中的较小值，防止小屏幕溢出 */
-    font-size: var(--banner-title-size, 3rem);
-    font-size: min(var(--banner-title-size, 3rem), 10vw);
+}
+
+/* 与参考站一致：小屏手机标题缩小为 2.5em（40px），避免换行 */
+@media (max-width: 480px) {
+    .banner-title {
+        font-size: 2.5em !important;
+    }
 }
 
 .banner-subtitle {

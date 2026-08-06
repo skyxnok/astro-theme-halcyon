@@ -9,7 +9,7 @@ export const siteConfig: SiteConfig = {
 	title: "SkyのXnok",
 
 	// 站点副标题
-	subtitle: "记录学习、生活与思考",
+	subtitle: "",
 
 	// 站点 URL
 	site_url: "https://201562.xyz",
@@ -18,20 +18,14 @@ export const siteConfig: SiteConfig = {
 	description: "记录学习、生活与思考的个人博客，使用 Astro 构建。",
 
 	// 站点关键词
-	keywords: [
-		"博客",
-		"Astro",
-		"技术博客",
-		"随笔",
-		"生活",
-	],
+	keywords: ["博客", "Astro", "技术博客", "随笔", "生活"],
 
 	// 主题色
 	themeColor: {
 		// 主题色的默认色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
-		hue: 165,
+		hue: 123,
 		// 是否对访问者隐藏主题色选择器
-		fixed: false,
+		fixed: true,
 		// 默认模式："light" 亮色，"dark" 暗色，"system" 跟随系统
 		defaultMode: "system",
 	},
@@ -69,11 +63,6 @@ export const siteConfig: SiteConfig = {
 		// 2. 本地图片（public目录，不优化）: { type: "image", value: "/assets/images/logo.webp", alt: "Logo" }
 		// 3. 本地图片（src目录，自动优化但会增加构建时间）: { type: "image", value: "assets/images/logo.webp", alt: "Logo" }
 		// 4. 网络图片: { type: "url", value: "https://example.com/logo.png", alt: "Logo" }
-		logo: {
-			type: "image",
-			value: "assets/images/firefly.png",
-			alt: "SkyのXnok",
-		},
 		// 导航栏标题
 		title: "SkyのXnok",
 		// 全宽导航栏，导航栏是否占满屏幕宽度
@@ -83,7 +72,7 @@ export const siteConfig: SiteConfig = {
 		// 导航栏图标和标题是否跟随主题色
 		followTheme: false,
 		// 导航栏是否固定在顶部并始终可见
-		stickyNavbar: true,
+		stickyNavbar: false,
 	},
 
 	// 站点开始日期，用于统计运行天数
@@ -122,7 +111,7 @@ export const siteConfig: SiteConfig = {
 		// 文章简介显示行数，设为 0 则不截断
 		descriptionLines: 2,
 		// 是否允许用户切换布局
-		allowSwitch: true,
+		allowSwitch: false,
 		// 网格布局配置，仅在 defaultMode 为 "grid" 或允许切换布局时生效
 		grid: {
 			// 是否开启瀑布流布局，同时有封面图和无封面图的混合文章推荐开启
@@ -156,19 +145,19 @@ export const siteConfig: SiteConfig = {
 
 	bangumi: {
 		// Bangumi用户ID
-		userId: "1143164",
+		userId: "skyxnok",
 		// 数据模式：static=构建时获取，dynamic=客户端实时获取
 		// static 模式在构建时获取数据并静态渲染，部署后数据不更新
 		// dynamic 模式在浏览器中实时请求 API，始终显示最新数据
 		mode: "dynamic",
 		// Bangumi API 地址
-		apiUrl: "https://api.bangumi.one",
+		apiUrl: "https://api.bgm.tv",
 		// 详情页地址
-		subjectBaseUrl: "https://bangumi.one/subject/",
+		subjectBaseUrl: "https://bgm.tv/subject/",
 		// 条目类型排序，数组中的类型将按顺序优先展示
 		// 可选值: "anime" | "book" | "music" | "game" | "real" (暂不支持"real"类型)
 		// 未列出的类型将按默认顺序排在后面
-		categoryOrder: ["anime", "book", "music", "game"],
+		categoryOrder: ["anime", "book", "music", "game","real"],
 	},
 
 	// 分页配置

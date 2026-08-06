@@ -22,7 +22,6 @@ html.is-page-transitioning .banner-home-text-overlay {
 .banner-title {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     animation: banner-fadeInUp 0.3s ease-out;
-    font-weight: bold;
     /* 防止大字体标题溢出容器 */
     overflow-wrap: break-word;
     word-break: break-word;

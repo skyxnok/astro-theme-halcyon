@@ -3,9 +3,6 @@
 
 // 类型导出
 export type {
-	AdConfig,
-	AnalyticsConfig,
-	AnnouncementConfig,
 	BackgroundWallpaperConfig,
 	CommentConfig,
 	CoverImageConfig,
@@ -14,7 +11,6 @@ export type {
 	GalleryAlbum,
 	GalleryConfig,
 	LicenseConfig,
-	MusicPlayerConfig,
 	NavBarConfig,
 	PlantUMLConfig,
 	ProfileConfig,
@@ -28,8 +24,6 @@ export type {
 	WidgetComponentType,
 	WidgetSpecificConfig,
 } from "../types/config";
-export { analyticsConfig } from "./analyticsConfig"; // 统计分析配置
-export { announcementConfig } from "./announcementConfig"; // 公告配置
 // 样式配置
 export { backgroundWallpaper } from "./backgroundWallpaper"; // 背景壁纸配置
 // 功能配置
@@ -43,9 +37,7 @@ export { friendsPageConfig, getEnabledFriends } from "./friendsConfig"; // 友�
 export { galleryConfig } from "./galleryConfig"; // 相册配置
 export { licenseConfig } from "./licenseConfig"; // 许可证配置
 // 组件配置
-export { musicPlayerConfig } from "./musicConfig"; // 音乐播放器配置
 export { navBarConfig, navBarSearchConfig } from "./navBarConfig"; // 导航栏配置与搜索配置
-export { live2dWidgetConfig, spineModelConfig } from "./pioConfig"; // 看板娘配置
 export { plantumlConfig } from "./plantumlConfig"; // PlantUML 图表配置
 export { profileConfig } from "./profileConfig"; // 用户资料配置
 // 布局配置

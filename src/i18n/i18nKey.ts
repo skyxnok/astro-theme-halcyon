@@ -19,11 +19,6 @@ enum I18nKey {
 	postList = "postList",
 	tableOfContents = "tableOfContents",
 	tocEmpty = "tocEmpty",
-	music = "music",
-
-	// 公告栏
-	announcement = "announcement",
-	announcementClose = "announcementClose",
 
 	comments = "comments",
 	commentSection = "commentSection",
@@ -41,26 +36,6 @@ enum I18nKey {
 	minutesCount = "minutesCount",
 	postCount = "postCount",
 	postsCount = "postsCount",
-
-	// Music Widget
-	musicNoPlaying = "musicNoPlaying",
-	musicLyrics = "musicLyrics",
-	musicVolume = "musicVolume",
-	musicPlayMode = "musicPlayMode",
-	musicPrev = "musicPrev",
-	musicNext = "musicNext",
-	musicPlaylist = "musicPlaylist",
-	musicNoLyrics = "musicNoLyrics",
-	musicLoadingLyrics = "musicLoadingLyrics",
-	musicFailedLyrics = "musicFailedLyrics",
-	musicNoSongs = "musicNoSongs",
-	musicError = "musicError",
-	musicPlay = "musicPlay",
-	musicPause = "musicPause",
-	musicProgress = "musicProgress",
-	musicCover = "musicCover",
-	musicNoCover = "musicNoCover",
-	musicAudioPlayer = "musicAudioPlayer",
 
 	themeColor = "themeColor",
 
@@ -303,7 +278,6 @@ enum I18nKey {
 	calendarDecember = "calendarDecember",
 	calendar = "calendar",
 	calendarHeatmapWeek = "calendarHeatmapWeek",
-	advertisement = "advertisement",
 
 	shareArticle = "shareArticle",
 	generatingPoster = "generatingPoster",

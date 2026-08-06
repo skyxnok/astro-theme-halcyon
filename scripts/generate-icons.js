@@ -121,6 +121,22 @@ async function getIconSvg(iconName) {
 		return null;
 	}
 
+	// 本地图标：从 src/icons/ 读取 SVG 文件
+	if (prefix === "local") {
+		try {
+			const filePath = join(SRC_DIR, "icons", `${name}.svg`);
+			// 压缩为单行，避免生成的 icons.ts 字符串被换行截断
+			let svg = readFileSync(filePath, "utf-8").replace(/\s+/g, " ").trim();
+			if (!svg.includes("currentColor")) {
+				svg = svg.replace("<svg", '<svg fill="currentColor"');
+			}
+			return svg;
+		} catch (error) {
+			console.warn(`⚠️  本地图标未找到: ${iconName}`);
+			return null;
+		}
+	}
+
 	const iconSet = await loadIconSet(prefix);
 	if (!iconSet) {
 		return null;

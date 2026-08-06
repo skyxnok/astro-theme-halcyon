@@ -1,6 +1,6 @@
 # 配置文件说明
 
-本目录包含 Firefly 主题的所有配置文件，采用模块化设计，每个文件负责特定的功能模块。
+本目录包含 halcyon 主题的所有配置文件，采用模块化设计，每个文件负责特定的功能模块。
 
 ## 📁 配置文件结构
 
@@ -8,8 +8,6 @@
 src/config/
 ├── index.ts                  # 配置索引文件 - 统一导出
 ├── siteConfig.ts             # 站点基础配置
-├── analyticsConfig.ts        # 统计分析配置（Google Analytics、Umami、51la 等）
-├── announcementConfig.ts     # 公告配置
 ├── backgroundWallpaper.ts    # 背景壁纸配置
 ├── commentConfig.ts          # 评论系统配置
 ├── coverImageConfig.ts       # 封面图配置
@@ -20,9 +18,7 @@ src/config/
 ├── friendsConfig.ts          # 友链配置
 ├── galleryConfig.ts          # 相册配置
 ├── licenseConfig.ts          # 许可证配置
-├── musicConfig.ts            # 音乐播放器配置
 ├── navBarConfig.ts           # 导航栏配置（含 LinkPresets 链接预设）
-├── pioConfig.ts              # 看板娘配置（Spine、Live2D）
 ├── plantumlConfig.ts         # PlantUML 图表配置
 ├── profileConfig.ts          # 用户资料配置
 ├── sidebarConfig.ts          # 侧边栏布局配置
@@ -48,8 +44,6 @@ import { profileConfig } from "@/config/profileConfig";
 | 文件 | 说明 |
 |------|------|
 | `siteConfig.ts` | 站点基础配置（标题、描述、主题色、页面宽度、文章内容页配置等） |
-| `analyticsConfig.ts` | 统计分析配置（Google Analytics、Microsoft Clarity、Umami、51la） |
-| `announcementConfig.ts` | 公告配置（标题、内容、类型、链接等） |
 | `backgroundWallpaper.ts` | 背景壁纸配置（壁纸模式、图片、横幅文字、水波纹等） |
 | `commentConfig.ts` | 评论系统配置（Twikoo、Waline、Artalk、Giscus、Disqus） |
 | `coverImageConfig.ts` | 封面图配置（文章封面图、随机封面图 API） |
@@ -60,9 +54,7 @@ import { profileConfig } from "@/config/profileConfig";
 | `friendsConfig.ts` | 友链配置（友链列表、页面设置） |
 | `galleryConfig.ts` | 相册配置（相册列表、瀑布流列宽） |
 | `licenseConfig.ts` | 许可证配置（CC 协议等） |
-| `musicConfig.ts` | 音乐播放器配置（Meting API / 本地音乐） |
 | `navBarConfig.ts` | 导航栏配置（动态链接、LinkPresets 链接预设、搜索配置） |
-| `pioConfig.ts` | 看板娘配置（Spine 模型、Live2D 模型） |
 | `plantumlConfig.ts` | PlantUML 图表渲染配置 |
 | `profileConfig.ts` | 用户资料配置（头像、姓名、社交链接） |
 | `sidebarConfig.ts` | 侧边栏布局配置（左侧/右侧/移动端组件列表） |
