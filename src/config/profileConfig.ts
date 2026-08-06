@@ -9,7 +9,7 @@ export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/avatar.avif",
 
 	// 名字
-	name: "我的博客",
+	name: "SkyのXnok",
 
 	// 个人签名
 	bio: "你好，欢迎来到我的博客！",
@@ -25,6 +25,12 @@ export const profileConfig: ProfileConfig = {
 			name: "RSS",
 			icon: "fa7-solid:rss",
 			url: "/rss/",
+			showName: false,
+		},
+		{
+			name: "GitHub",
+			icon: "fa7-brands:github",
+			url: "https://github.com/skyxnok",
 			showName: false,
 		},
 	],

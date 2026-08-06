@@ -6,13 +6,13 @@ const SITE_LANG = "zh_CN";
 
 export const siteConfig: SiteConfig = {
 	// 站点标题
-	title: "我的博客",
+	title: "SkyのXnok",
 
 	// 站点副标题
 	subtitle: "记录学习、生活与思考",
 
 	// 站点 URL
-	site_url: "https://example.com",
+	site_url: "https://201562.xyz",
 
 	// 站点描述
 	description: "记录学习、生活与思考的个人博客，使用 Astro 构建。",
@@ -55,7 +55,7 @@ export const siteConfig: SiteConfig = {
 			// 图标文件路径
 			src: "/favicon/favicon.ico",
 			// 可选，指定主题 'light' | 'dark'
-			// theme: "light",
+			theme: "light",
 			// 可选，图标大小
 			// sizes: "32x32",
 		},
@@ -72,12 +72,12 @@ export const siteConfig: SiteConfig = {
 		logo: {
 			type: "image",
 			value: "assets/images/firefly.png",
-			alt: "我的博客",
+			alt: "SkyのXnok",
 		},
 		// 导航栏标题
-		title: "我的博客",
+		title: "SkyのXnok",
 		// 全宽导航栏，导航栏是否占满屏幕宽度
-		widthFull: false,
+		widthFull: true,
 		// 导航菜单对齐方式，left：左对齐，center：居中
 		menuAlign: "center",
 		// 导航栏图标和标题是否跟随主题色
@@ -87,7 +87,7 @@ export const siteConfig: SiteConfig = {
 	},
 
 	// 站点开始日期，用于统计运行天数
-	siteStartDate: "2025-01-01",
+	siteStartDate: "2026-06-01",
 
 	// 站点时区（IANA 时区字符串），用于格式化bangumi、rss里的构建日期时间等等..
 	// 示例："Asia/Shanghai", "UTC", 如果为空，则按照构建服务器的时区进行时区转换
@@ -152,7 +152,8 @@ export const siteConfig: SiteConfig = {
 		generateOgImages: false,
 	},
 
-	// bangumi配置
+	// bangumi配置yp9ppSoWgtCWA8c5sgdyjmVvmq8LWNJKNSdjHfOm
+
 	bangumi: {
 		// Bangumi用户ID
 		userId: "1143164",
