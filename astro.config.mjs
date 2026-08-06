@@ -9,6 +9,7 @@ export default defineConfig({
 	// TODO: 替换为你的正式域名，例如 https://yourname.com
 	site: 'https://example.com',
 	integrations: [mdx(), sitemap()],
+	devToolbar: { enabled: false },
 	fonts: [
 		{
 			provider: fontProviders.local(),
