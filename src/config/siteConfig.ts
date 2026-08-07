@@ -141,7 +141,7 @@ export const siteConfig: SiteConfig = {
 		generateOgImages: false,
 	},
 
-	// bangumi配置yp9ppSoWgtCWA8c5sgdyjmVvmq8LWNJKNSdjHfOm
+	// bangumi配置
 
 	bangumi: {
 		// Bangumi用户ID
