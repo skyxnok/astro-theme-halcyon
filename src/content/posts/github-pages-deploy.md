@@ -1,6 +1,6 @@
 ---
 title: 博客部署教程（三）：GitHub Pages
-published: 2026-08-07
+published: 2026-08-07T08:00:00+08:00
 pinned: false
 description: 我的博客主题 Halcyon 使用 GitHub Actions 自动部署到 GitHub Pages 的完整教程。
 tags: [部署, 教程]

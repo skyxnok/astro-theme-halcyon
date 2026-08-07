@@ -15,9 +15,21 @@ async function getRawSortedPosts() {
 		if (!a.data.pinned && b.data.pinned) return 1;
 
 		// 如果置顶状态相同，则按发布日期排序
-		const dateA = new Date(a.data.published);
-		const dateB = new Date(b.data.published);
-		return dateA > dateB ? -1 : 1;
+		const dateA = new Date(a.data.published).getTime();
+		const dateB = new Date(b.data.published).getTime();
+		if (dateA !== dateB) return dateA > dateB ? -1 : 1;
+
+		// 同一天时用 updated 兜底（未设置则视为与 published 相同）
+		const updatedA = a.data.updated
+			? new Date(a.data.updated).getTime()
+			: dateA;
+		const updatedB = b.data.updated
+			? new Date(b.data.updated).getTime()
+			: dateB;
+		if (updatedA !== updatedB) return updatedA > updatedB ? -1 : 1;
+
+		// 仍然相同时按文件 id 排序，保证顺序稳定
+		return a.id.localeCompare(b.id);
 	});
 	return sorted;
 }

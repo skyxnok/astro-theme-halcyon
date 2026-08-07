@@ -1,6 +1,6 @@
 ---
 title: 你好，世界！
-published: 2026-08-06
+published: 2026-08-06T00:37:00+08:00
 pinned: false
 description: 我的第一篇博客文章，欢迎来到我的小天地。
 tags: [随笔]

@@ -1,6 +1,6 @@
 ---
 title: 博客部署教程（二）：Cloudflare
-published: 2026-08-07
+published: 2026-08-07T07:30:00+08:00
 pinned: false
 description: 我的博客主题 Halcyon 使用 Cloudflare Pages 与 Workers 两种方式部署的完整教程。
 tags: [部署, 教程]

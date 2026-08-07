@@ -1,6 +1,6 @@
 ---
 title: Mac 微信双开教程
-published: 2026-08-07
+published: 2026-08-07T06:22:00+08:00
 pinned: false
 description: 在 Mac 上双开微信的完整方法：复制应用、修改 Bundle ID、重新签名，附自签名证书方案与常见问题。
 tags: [Mac, 微信, 教程]

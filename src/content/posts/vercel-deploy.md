@@ -1,6 +1,6 @@
 ---
 title: 博客部署教程（一）：Vercel
-published: 2026-08-07
+published: 2026-08-07T07:00:00+08:00
 pinned: false
 description: 我的博客主题 Halcyon 使用 Vercel 部署的完整教程，从导入仓库到自定义域名。
 tags: [部署, 教程]

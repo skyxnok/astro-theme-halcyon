@@ -1,6 +1,6 @@
 ---
 title: macOS 下 oh-my-zsh 安装与美化教程
-published: 2026-08-07
+published: 2026-08-07T16:44:00+08:00
 pinned: false
 description: 从零配置 zsh + oh-my-zsh + powerlevel10k，让终端变得好用又好看，附字体与插件配置。
 tags: [教程, 工具, macOS]
