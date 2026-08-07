@@ -118,7 +118,7 @@ export const friendsConfig: FriendLink[] = [
     title: "二叉树树",
     desc: "二叉树树的个人网站 —— 包含技术博客、论坛社区、AI 生图、实用在线工具等",
     siteurl: "https://2x.nz",
-    imgurl: "https://2x.nz/files/img/official.png",
+    imgurl: "https://q2.qlogo.cn/headimg_dl?dst_uin=2726730791&spec=140&t=1786118393856",
     tags: ["Blog"],
     weight: 8,
     enabled: true,
