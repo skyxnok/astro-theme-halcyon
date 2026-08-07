@@ -38,6 +38,7 @@ export { friendsPageConfig, getEnabledFriends } from "./friendsConfig"; // 友�
 export { galleryConfig } from "./galleryConfig"; // 相册配置
 export { licenseConfig } from "./licenseConfig"; // 许可证配置
 export { quoteConfig } from "./quoteConfig"; // 今日一言配置
+export { weatherConfig } from "./weatherConfig"; // 天气配置（API Key 等）
 export { relationshipConfig } from "./relationshipConfig"; // 恋爱计时配置
 // 组件配置
 export { navBarConfig, navBarSearchConfig } from "./navBarConfig"; // 导航栏配置与搜索配置

@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import { weatherConfig } from "@/config";
 import WidgetLayout from "@/components/common/WidgetLayout.astro";
 import type { WidgetComponentConfig } from "@/types/config";
 
@@ -16,12 +17,15 @@ interface Props {
 const { class: className, style, widgetConfig, city: propCity, adcode: propAdcode, extended: propExtended = true } = Astro.props;
 
 // 组件专属配置优先，其次使用直接传入的 props
-const weatherConfig = widgetConfig?.specificConfig?.weather;
-const city = weatherConfig?.city ?? propCity;
-const adcode = weatherConfig?.adcode ?? propAdcode;
-const extended = weatherConfig?.extended ?? propExtended;
+const widgetWeatherConfig = widgetConfig?.specificConfig?.weather;
+const city = widgetWeatherConfig?.city ?? propCity;
+const adcode = widgetWeatherConfig?.adcode ?? propAdcode;
+const extended = widgetWeatherConfig?.extended ?? propExtended;
 
 const showTitle = widgetConfig?.showTitle !== false;
+
+// uapis.cn API Key（全局配置于 src/config/weatherConfig.ts，用于避免免费接口公共限流）
+const apiKey = widgetWeatherConfig?.apiKey ?? weatherConfig.apiKey;
 
 // 缓存键名
 const CACHE_KEY = "weather_data_cache";
@@ -608,7 +612,7 @@ const COLLAPSED_HEIGHT = "9rem";
 	}
 </style>
 
-<script is:inline define:vars={{ city, adcode, CACHE_KEY, CACHE_DURATION, extended }}>
+<script is:inline define:vars={{ city, adcode, CACHE_KEY, CACHE_DURATION, extended, apiKey }}>
 	(function () {
 		const API_URL = "https://uapis.cn/api/v1/misc/weather?";
 
@@ -642,7 +646,8 @@ const COLLAPSED_HEIGHT = "9rem";
 			params.set("forecast", "true");
 
 			const url = API_URL + params.toString();
-			const response = await fetch(url);
+			const headers = apiKey ? { Authorization: `Bearer ${apiKey}` } : undefined;
+			const response = await fetch(url, { headers });
 
 			if (!response.ok) {
 				throw new Error(`请求失败: ${response.status}`);

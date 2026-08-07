@@ -45,6 +45,7 @@ export type WeatherWidgetConfig = {
 	city?: string; // 城市名，如 "北京"
 	adcode?: string; // 行政区划代码，如 "110000"
 	extended?: boolean; // 是否显示扩展信息（湿度/气压/空气质量等），默认 true
+	apiKey?: string; // uapis.cn API Key，覆盖全局 weatherConfig.apiKey
 };
 
 // 日历组件专用配置
