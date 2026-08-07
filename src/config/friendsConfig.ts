@@ -96,6 +96,24 @@ export const friendsConfig: FriendLink[] = [
     weight: 8,
     enabled: true,
   },
+    {
+    title: "Nachcekoの小窝",
+    desc: "1つの熱愛の2次元の小さい萌の新しい~ /.こんにちはnya~です",
+    siteurl: "https://blog.nachceko.qzz.io",
+    imgurl: "https://avatars.githubusercontent.com/u/172878250?v=4",
+	tags: ["Astro"],
+    weight: 8,
+    enabled: true,
+  },
+     {
+    title: "Hyde Blog",
+    desc: "人心中的成见是一座大山",
+    siteurl: "https://seasir.top",
+    imgurl: "https://seasir.top/assets/avatar.avif",
+	tags: ["Astro"],
+    weight: 8,
+    enabled: true,
+  },
 ];
 
 // 获取启用的友链并进行排序
