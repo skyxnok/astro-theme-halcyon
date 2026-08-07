@@ -4,5 +4,9 @@
 	"compatibility_flags": ["nodejs_compat"],
 	"assets": {
 		"directory": "./dist"
-	}
+	},
+	"routes": [
+		{ "pattern": "201562.xyz", "custom_domain": true },
+		{ "pattern": "www.201562.xyz", "custom_domain": true }
+	]
 }
