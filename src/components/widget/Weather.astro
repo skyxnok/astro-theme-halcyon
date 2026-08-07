@@ -29,7 +29,7 @@ const apiKeys = widgetWeatherConfig?.apiKeys ?? weatherConfig.apiKeys;
 
 // 缓存键名
 const CACHE_KEY = "weather_data_cache";
-const CACHE_DURATION = 60 * 60 * 1000; // 1小时缓存（接口数据约每小时更新一次，避免频繁请求消耗额度）
+const CACHE_DURATION = 15 * 60 * 1000; // 15分钟缓存（每15分钟刷新一次天气）
 
 const COLLAPSED_HEIGHT = "9rem";
 ---
