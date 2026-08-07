@@ -6,7 +6,7 @@ description: 我的博客主题 Halcyon 使用 GitHub Actions 自动部署到 Gi
 tags: [部署, 教程]
 category: 教程
 draft: false
-image: /images/covers/github-pages-deploy.jpg
+image: /images/covers/github-pages-deploy.avif
 ---
 
 我的博客主题 Halcyon 内置了 `.github/workflows/deploy.yml`，使用 [JamesIves/github-pages-deploy-action](https://github.com/JamesIves/github-pages-deploy-action) 自动部署到 `pages` 分支。

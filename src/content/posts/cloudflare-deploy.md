@@ -6,7 +6,7 @@ description: 我的博客主题 Halcyon 使用 Cloudflare Pages 与 Workers 两�
 tags: [部署, 教程]
 category: 教程
 draft: false
-image: /images/covers/cloudflare-deploy.jpg
+image: /images/covers/cloudflare-deploy.avif
 ---
 
 我的博客主题 Halcyon 支持两种 Cloudflare 部署方式：**Cloudflare Pages**（图形化，推荐）和 **Cloudflare Workers**（CLI，项目里已内置 `wrangler.jsonc`）。

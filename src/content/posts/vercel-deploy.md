@@ -6,7 +6,7 @@ description: 我的博客主题 Halcyon 使用 Vercel 部署的完整教程，�
 tags: [部署, 教程]
 category: 教程
 draft: false
-image: /images/covers/vercel-deploy.jpg
+image: /images/covers/vercel-deploy.avif
 ---
 
 我的博客主题 Halcyon 用 Vercel 部署最简单：仓库推送到 GitHub 后，在 Vercel 导入即可自动构建，项目里已经内置了 `vercel.json`，不需要额外配置。

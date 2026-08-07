@@ -6,7 +6,7 @@ description: 在 Mac 上双开微信的完整方法：复制应用、修改 Bund
 tags: [Mac, 微信, 教程]
 category: 教程
 draft: false
-image: /images/covers/mac-wechat-dual-open.jpg
+image: /images/covers/mac-wechat-dual-open.avif
 ---
 
 macOS 的微信默认只能同时运行一个实例。要实现双开，思路是：**复制一份微信应用，修改它的 Bundle ID，让系统把它当成一个独立的 App**，再重新签名使其可以正常启动。

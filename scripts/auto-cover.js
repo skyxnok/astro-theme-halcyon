@@ -9,6 +9,7 @@
 import { readdirSync, readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join, dirname, extname } from "path";
 import { fileURLToPath } from "url";
+import sharp from "sharp";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = join(__dirname, "..");
@@ -20,6 +21,18 @@ const API_URL = "https://pic.201562.xyz/random?folder=background";
 const API_RETRY = 3;
 const USER_AGENT =
 	"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36";
+
+// 封面图统一转 AVIF：限制宽度并压缩，体积更小、加载更快
+const AVIF_MAX_WIDTH = 1600;
+const AVIF_QUALITY = 55;
+
+/** 把图片 Buffer 转换为 AVIF 格式 */
+async function toAvif(buf) {
+	return sharp(buf)
+		.resize({ width: AVIF_MAX_WIDTH, withoutEnlargement: true })
+		.avif({ quality: AVIF_QUALITY, effort: 4 })
+		.toBuffer();
+}
 
 /** 解析 Frontmatter，返回字段行数组和结束行索引 */
 function parseFrontmatter(content) {
@@ -103,13 +116,14 @@ async function main() {
 			continue;
 		}
 
-		const { buf, ext } = await fetchRandomImage();
+		const { buf } = await fetchRandomImage();
 		const slug = file.replace(/\.(md|mdx)$/, "").replace(/[^\w.-]+/g, "-");
-		const saveName = `${slug}${ext}`;
+		const avifBuf = await toAvif(buf);
+		const saveName = `${slug}.avif`;
 		const imagePath = `/images/covers/${saveName}`;
 
 		mkdirSync(COVERS_DIR, { recursive: true });
-		writeFileSync(join(COVERS_DIR, saveName), buf);
+		writeFileSync(join(COVERS_DIR, saveName), avifBuf);
 		writeFileSync(filePath, addImageField(content, fm, imagePath));
 
 		console.log(`已为 ${file} 下载封面 -> ${imagePath}`);
