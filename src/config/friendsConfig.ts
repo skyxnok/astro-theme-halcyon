@@ -114,6 +114,15 @@ export const friendsConfig: FriendLink[] = [
     weight: 8,
     enabled: true,
   },
+  {
+    title: "二叉树树",
+    desc: "二叉树树的个人网站 —— 包含技术博客、论坛社区、AI 生图、实用在线工具等",
+    siteurl: "https://2x.nz",
+    imgurl: "https://2x.nz/files/img/official.png",
+    tags: ["Blog"],
+    weight: 8,
+    enabled: true,
+  },
 ];
 
 // 获取启用的友链并进行排序
