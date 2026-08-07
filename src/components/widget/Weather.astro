@@ -24,12 +24,12 @@ const extended = widgetWeatherConfig?.extended ?? propExtended;
 
 const showTitle = widgetConfig?.showTitle !== false;
 
-// uapis.cn API Key（全局配置于 src/config/weatherConfig.ts，用于避免免费接口公共限流）
-const apiKey = widgetWeatherConfig?.apiKey ?? weatherConfig.apiKey;
+// uapis.cn API Keys（全局配置于 src/config/weatherConfig.ts，多个 key 轮换使用分摊额度）
+const apiKeys = widgetWeatherConfig?.apiKeys ?? weatherConfig.apiKeys;
 
 // 缓存键名
 const CACHE_KEY = "weather_data_cache";
-const CACHE_DURATION = 30 * 60 * 1000; // 30分钟缓存
+const CACHE_DURATION = 60 * 60 * 1000; // 1小时缓存（接口数据约每小时更新一次，避免频繁请求消耗额度）
 
 const COLLAPSED_HEIGHT = "9rem";
 ---
@@ -612,7 +612,7 @@ const COLLAPSED_HEIGHT = "9rem";
 	}
 </style>
 
-<script is:inline define:vars={{ city, adcode, CACHE_KEY, CACHE_DURATION, extended, apiKey }}>
+<script is:inline define:vars={{ city, adcode, CACHE_KEY, CACHE_DURATION, extended, apiKeys }}>
 	(function () {
 		const API_URL = "https://uapis.cn/api/v1/misc/weather?";
 
@@ -630,6 +630,20 @@ const COLLAPSED_HEIGHT = "9rem";
 			}
 		};
 
+		// 轮换选择 API Key：每次调用换下一个，分摊免费额度
+		function getApiKey() {
+			if (!apiKeys || apiKeys.length === 0) return null;
+			if (apiKeys.length === 1) return apiKeys[0];
+			let idx = 0;
+			try {
+				idx = (parseInt(localStorage.getItem("weather_api_key_idx") || "0", 10) + 1) % apiKeys.length;
+				localStorage.setItem("weather_api_key_idx", String(idx));
+			} catch {
+				// 忽略存储错误
+			}
+			return apiKeys[idx];
+		}
+
 		// 获取天气数据 - 支持 IP 自动定位
 		async function fetchWeather() {
 			const params = new URLSearchParams();
@@ -646,6 +660,7 @@ const COLLAPSED_HEIGHT = "9rem";
 			params.set("forecast", "true");
 
 			const url = API_URL + params.toString();
+			const apiKey = getApiKey();
 			const headers = apiKey ? { Authorization: `Bearer ${apiKey}` } : undefined;
 			const response = await fetch(url, { headers });
 
@@ -655,12 +670,9 @@ const COLLAPSED_HEIGHT = "9rem";
 
 			const data = await response.json();
 
-			// 只有指定了城市或adcode时才缓存，IP自动定位不缓存
-			// 因为IP可能会变化（切换网络、VPN等）
-			if (adcode || city) {
-				const cacheKey = adcode ? `adcode_${adcode}` : `city_${city}`;
-				cacheManager.set(CACHE_KEY + cacheKey, data);
-			}
+			// 缓存 1 小时（IP 定位也缓存，避免频繁请求消耗 API 额度；重试按钮会清除缓存）
+			const cacheKey = adcode ? `adcode_${adcode}` : (city ? `city_${city}` : "ip_location");
+			cacheManager.set(CACHE_KEY + cacheKey, data);
 
 			return data;
 		}
