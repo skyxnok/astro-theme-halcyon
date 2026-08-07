@@ -74,6 +74,27 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 				collapseThreshold: 10,
 			},
 		},
+		{
+			// 组件类型：今日一言
+			type: "quoteOfTheDay",
+			// 是否启用该组件
+			enable: true,
+			// 组件位置
+			position: "sticky",
+			// 是否在文章详情页显示
+			showOnPostPage: true,
+		},
+		{
+			// 组件类型：恋爱计时组件
+			type: "relationship",
+			// 是否启用该组件
+			// 暂时关闭，等有配置再开启（配置见 src/config/relationshipConfig.ts）
+			enable: false,
+			// 组件位置
+			position: "sticky",
+			// 是否在文章详情页显示
+			showOnPostPage: true,
+		},
 	],
 
 	// 右侧边栏组件配置列表
@@ -91,6 +112,16 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 		{
 			// 组件类型：站点信息组件
 			type: "siteInfo",
+			// 是否启用该组件
+			enable: true,
+			// 组件位置
+			position: "top",
+			// 是否在文章详情页显示
+			showOnPostPage: true,
+		},
+		{
+			// 组件类型：天气组件
+			type: "weather",
 			// 是否启用该组件
 			enable: true,
 			// 组件位置
@@ -181,6 +212,31 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			type: "siteInfo",
 			// 是否启用该组件
 			enable: true,
+			// 是否在文章详情页显示
+			showOnPostPage: true,
+		},
+		{
+			// 组件类型：天气组件
+			type: "weather",
+			// 是否启用该组件
+			enable: true,
+			// 是否在文章详情页显示
+			showOnPostPage: true,
+		},
+		{
+			// 组件类型：今日一言
+			type: "quoteOfTheDay",
+			// 是否启用该组件
+			enable: true,
+			// 是否在文章详情页显示
+			showOnPostPage: true,
+		},
+		{
+			// 组件类型：恋爱计时组件
+			type: "relationship",
+			// 是否启用该组件
+			// 暂时关闭，等有配置再开启（配置见 src/config/relationshipConfig.ts）
+			enable: false,
 			// 是否在文章详情页显示
 			showOnPostPage: true,
 		},

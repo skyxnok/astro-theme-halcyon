@@ -6,7 +6,10 @@ export type WidgetComponentType =
 	| "sidebarToc"
 	| "stats"
 	| "calendar"
-	| "siteInfo";
+	| "siteInfo"
+	| "quoteOfTheDay"
+	| "weather"
+	| "relationship";
 
 export type WidgetComponentConfig = {
 	type: WidgetComponentType; // 组件类型
@@ -34,6 +37,14 @@ export type WidgetSpecificConfig = {
 	hidden?: ("mobile" | "tablet" | "desktop")[]; // 在指定设备上隐藏
 	collapseThreshold?: number; // 折叠阈值
 	calendar?: CalendarConfig; // 日历组件专用配置
+	weather?: WeatherWidgetConfig; // 天气组件专用配置
+};
+
+// 天气组件专用配置
+export type WeatherWidgetConfig = {
+	city?: string; // 城市名，如 "北京"
+	adcode?: string; // 行政区划代码，如 "110000"
+	extended?: boolean; // 是否显示扩展信息（湿度/气压/空气质量等），默认 true
 };
 
 // 日历组件专用配置

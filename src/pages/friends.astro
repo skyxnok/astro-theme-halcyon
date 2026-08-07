@@ -40,6 +40,24 @@ const allTags = [...new Set(items.flatMap((item) => item.tags || []))].sort();
 const title = friendsPageConfig.title || i18n(I18nKey.friends);
 const description =
 	friendsPageConfig.description || i18n(I18nKey.friendsDescription);
+
+// 站点信息和注意事项（用于友链申请表单）
+const siteInfo = friendsPageConfig.site ?? {
+	name: "",
+	desc: "",
+	url: "",
+	avatar: "",
+	email: "",
+};
+const notes = friendsPageConfig.notes ?? [];
+const apiEndpoint = friendsPageConfig.apiEndpoint || "";
+const siteEmail = siteInfo.email || "";
+
+const escapedSiteName = (siteInfo.name || "").replace(/'/g, "\\'");
+const escapedSiteDesc = (siteInfo.desc || "").replace(/'/g, "\\'");
+const escapedSiteUrl = (siteInfo.url || "").replace(/'/g, "\\'");
+const escapedSiteAvatar = (siteInfo.avatar || "").replace(/'/g, "\\'");
+const copyAllOnClick = `navigator.clipboard.writeText('站点名称：${escapedSiteName}\\n站点描述：${escapedSiteDesc}\\n站点链接：${escapedSiteUrl}\\n头像链接：${escapedSiteAvatar}');this.querySelectorAll('svg')[0].classList.add('hidden');this.querySelectorAll('svg')[1].classList.remove('hidden');setTimeout(()=>{this.querySelectorAll('svg')[0].classList.remove('hidden');this.querySelectorAll('svg')[1].classList.add('hidden')},1500)`;
 ---
 
 <MainGridLayout title={title} description={description}>
@@ -180,6 +198,164 @@ const description =
     </div>
   </div>
 
+  {/* 本站信息 + 申请友链表单 + 注意事项 */}
+  <div class="mt-4">
+    <div class="card-base z-10 px-9 py-6 relative w-full mb-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {/* 左栏：本站信息 */}
+        <div class="rounded-2xl border border-(--line-divider) overflow-hidden flex flex-col">
+          <div class="p-5 sm:p-6 flex flex-col flex-1">
+            <div class="flex items-center gap-4 mb-5">
+              <div class="relative shrink-0">
+                <div class="w-16 h-16 rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 ring-2 ring-(--primary)/20">
+                  <img src={siteInfo.avatar} alt={siteInfo.name} class="w-full h-full object-cover" />
+                </div>
+                <div class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-(--primary) flex items-center justify-center shadow">
+                  <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">{siteInfo.name}</h3>
+                <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">{siteInfo.desc}</p>
+              </div>
+            </div>
+
+            {/* 一键复制所有信息按钮 */}
+            <button
+              onclick={copyAllOnClick}
+              class="w-full flex items-center justify-center gap-2 rounded-lg bg-(--primary) text-white px-4 py-2.5 text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer mb-3"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              <svg class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>一键复制所有信息</span>
+            </button>
+
+            <div class="space-y-2.5 flex-1">
+              {[
+                { label: "站点名称", value: siteInfo.name },
+                { label: "站点描述", value: siteInfo.desc },
+                { label: "站点链接", value: siteInfo.url },
+                { label: "头像链接", value: siteInfo.avatar },
+              ].map((item) => (
+                <div class="flex items-center justify-between gap-2 rounded-lg bg-black/5 dark:bg-white/5 px-3 py-2">
+                  <div class="min-w-0">
+                    <p class="text-[0.65rem] text-neutral-400 dark:text-neutral-500 mb-0.5">{item.label}</p>
+                    <p class="text-xs font-medium truncate text-neutral-900 dark:text-neutral-100">{item.value}</p>
+                  </div>
+                  <button onclick={`navigator.clipboard.writeText('${item.value.replace(/'/g, "\\'")}');this.querySelectorAll('svg')[0].classList.add('hidden');this.querySelectorAll('svg')[1].classList.remove('hidden');setTimeout(()=>{this.querySelectorAll('svg')[0].classList.remove('hidden');this.querySelectorAll('svg')[1].classList.add('hidden')},1500)`} class="shrink-0 w-7 h-7 flex items-center justify-center rounded-md bg-black/10 dark:bg-white/10 text-neutral-900 dark:text-neutral-100 hover:opacity-80 transition-opacity cursor-pointer">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                    <svg class="w-3.5 h-3.5 hidden text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            {/* 底部注意事项 */}
+            <div class="rounded-2xl overflow-hidden z-10 px-0 py-6 relative w-full">
+              <h3 class="text-base font-bold mb-4 flex items-center gap-2 text-neutral-900 dark:text-neutral-100">
+                <svg class="w-4.5 h-4.5 text-(--primary)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                注意事项
+              </h3>
+              <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-400">
+                {notes.map((item) => (
+                  <div class="flex items-baseline gap-2.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-(--primary) shrink-0 translate-y-[-2px]"></span>
+                    <p><strong class="text-neutral-800 dark:text-neutral-200">{item.title}</strong>：{item.content}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 右栏：申请流程 */}
+        <div class="rounded-2xl border border-(--line-divider) overflow-hidden flex flex-col">
+          <div class="p-5 sm:p-6 flex flex-col flex-1">
+            <h3 class="text-lg font-bold mb-5 flex items-center gap-2 text-neutral-900 dark:text-neutral-100">
+              <span class="w-7 h-7 rounded-lg bg-(--primary)/10 flex items-center justify-center text-(--primary)">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M11 17H7q-2.075 0-3.537-1.463T2 12t1.463-3.537T7 7h4v2H7q-1.25 0-2.125.875T4 12t.875 2.125T7 15h4zm-3-4v-2h8v2zm5 4v-2h4q1.25 0 2.125-.875T20 12t-.875-2.125T17 9h-4V7h4q2.075 0 3.538 1.463T22 12t-1.463 3.538T17 17z"/></svg>
+              </span>
+              申请友链
+            </h3>
+
+            <div id="friend-apply-steps" class="space-y-0 flex-1">
+              <div class="flex gap-3.5">
+                <div class="flex flex-col items-center">
+                  <div class="w-7 h-7 rounded-full bg-(--primary) text-white text-xs font-bold flex items-center justify-center shrink-0">1</div>
+                  <div class="w-0.5 flex-1 bg-(--line-divider) my-1.5"></div>
+                </div>
+                <div class="pb-4">
+                  <p class="font-semibold text-sm mb-1 text-neutral-900 dark:text-neutral-100">添加本站友链</p>
+                  <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">请先在您的网站友链页面添加本站信息</p>
+                </div>
+              </div>
+
+              <div class="flex gap-3.5">
+                <div class="flex flex-col items-center">
+                  <div class="w-7 h-7 rounded-full bg-(--primary) text-white text-xs font-bold flex items-center justify-center shrink-0">2</div>
+                  <div class="w-0.5 flex-1 bg-(--line-divider) my-1.5"></div>
+                </div>
+                <div class="pb-4 flex-1 min-w-0">
+                  <p class="font-semibold text-sm mb-1 text-neutral-900 dark:text-neutral-100">填写申请信息：</p>
+                  <form id="friend-link-form" class="space-y-3">
+                    <div>
+                      <label class="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1">站点名称 <span class="text-red-500">*</span></label>
+                      <input type="text" name="title" required placeholder="您的站点名称" class="w-full rounded-lg bg-black/5 dark:bg-white/5 border border-(--line-divider) px-3 py-2 text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-(--primary)/30 focus:border-(--primary) transition-colors" />
+                    </div>
+                    <div>
+                      <label class="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1">站点描述 <span class="text-red-500">*</span></label>
+                      <input type="text" name="desc" required placeholder="您的站点描述" class="w-full rounded-lg bg-black/5 dark:bg-white/5 border border-(--line-divider) px-3 py-2 text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-(--primary)/30 focus:border-(--primary) transition-colors" />
+                    </div>
+                    <div>
+                      <label class="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1">站点链接 <span class="text-red-500">*</span></label>
+                      <input type="url" name="siteUrl" required placeholder="https://example.com" class="w-full rounded-lg bg-black/5 dark:bg-white/5 border border-(--line-divider) px-3 py-2 text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-(--primary)/30 focus:border-(--primary) transition-colors" />
+                    </div>
+                    <div>
+                      <label class="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1">头像链接 <span class="text-red-500">*</span></label>
+                      <input type="url" name="imgUrl" required placeholder="https://example.com/avatar.png" class="w-full rounded-lg bg-black/5 dark:bg-white/5 border border-(--line-divider) px-3 py-2 text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-(--primary)/30 focus:border-(--primary) transition-colors" />
+                    </div>
+                    <div>
+                      <label class="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1">联系邮箱（可选）</label>
+                      <input type="email" name="email" placeholder="方便站长必要时联系" class="w-full rounded-lg bg-black/5 dark:bg-white/5 border border-(--line-divider) px-3 py-2 text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-(--primary)/30 focus:border-(--primary) transition-colors" />
+                    </div>
+                    <div>
+                      <label class="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1">留言（可选）</label>
+                      <textarea name="message" rows="2" placeholder="例如已添加本站友链的页面地址" class="w-full rounded-lg bg-black/5 dark:bg-white/5 border border-(--line-divider) px-3 py-2 text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-(--primary)/30 focus:border-(--primary) transition-colors resize-none"></textarea>
+                    </div>
+                    <div class="pt-1">
+                      <button type="button" id="friend-submit-btn" class="flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg bg-(--primary) text-white hover:opacity-90 transition-opacity text-sm font-medium cursor-pointer w-full disabled:opacity-50 disabled:pointer-events-none">
+                        <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2657" width="16" height="16"><path d="M711.5008 695.9872l-268.4672-83.0208L711.5008 302.592l-351.488 310.3744L153.6 530.688 814.72 179.2l-103.2192 516.7872z m-268.4672 124.1344v-145.0752l82.9952 41.1136-82.9952 103.9616z" fill="#ffffff" p-id="2658"></path></svg>
+                        <span>提交申请</span>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              <div class="flex gap-3.5">
+                <div class="flex flex-col items-center">
+                  <div class="w-7 h-7 rounded-full bg-(--primary) text-white text-xs font-bold flex items-center justify-center shrink-0">3</div>
+                </div>
+                <div>
+                  <p class="font-semibold text-sm mb-1 text-neutral-900 dark:text-neutral-100">等待审核</p>
+                  <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">确认信息无误后会尽快添加您的友链</p>
+                </div>
+              </div>
+            </div>
+
+            <div id="friend-form-success" class="hidden flex-col items-center justify-center gap-3 py-8 text-center">
+              <svg class="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <div>
+                <p class="font-semibold text-green-600 dark:text-green-400">申请已提交！</p>
+                <p class="text-xs text-green-500/80 dark:text-green-400/80 mt-1">审核通过后会尽快添加您的友链，请耐心等待</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   {friendsPageConfig.showCustomContent !== false && (
     <div class="mt-4 card-base z-10 px-9 py-6 relative w-full">
       <Markdown class="">
@@ -287,11 +463,133 @@ const description =
     }
   </script>
 
+  <script is:inline define:vars={{ apiEndpoint, siteEmail }}>
+    // 申请友链表单逻辑
+    function showFriendToast(msg) {
+      var t = document.createElement("div");
+      t.className = "friend-toast";
+      t.textContent = msg;
+      document.body.appendChild(t);
+      setTimeout(function () {
+        t.classList.add("friend-toast-hide");
+        setTimeout(function () { t.remove(); }, 300);
+      }, 3000);
+    }
+
+    function initFriendForm() {
+      var form = document.getElementById("friend-link-form");
+      var submitBtn = document.getElementById("friend-submit-btn");
+      var successEl = document.getElementById("friend-form-success");
+      var stepsEl = document.getElementById("friend-apply-steps");
+
+      // 防止重复初始化（swup 切换页面时会再次触发）
+      if (!form || !submitBtn || submitBtn.dataset.initialized) return;
+
+      var isSubmitting = false;
+      submitBtn.dataset.initialized = "true";
+
+      submitBtn.addEventListener("click", async function () {
+        if (isSubmitting) return;
+        isSubmitting = true;
+
+        // 读取表单字段并去掉首尾空格
+        var title = form.querySelector('input[name="title"]').value.trim();
+        var desc = form.querySelector('input[name="desc"]').value.trim();
+        var siteUrl = form.querySelector('input[name="siteUrl"]').value.trim();
+        var imgUrl = form.querySelector('input[name="imgUrl"]').value.trim();
+        var email = form.querySelector('input[name="email"]').value.trim();
+        var message = form.querySelector('textarea[name="message"]').value.trim();
+
+        // 校验：任一必填项为空则弹提示
+        if (!title || !desc || !siteUrl || !imgUrl) {
+          isSubmitting = false;
+          showFriendToast("请填写完整信息");
+          return;
+        }
+
+        // 进入提交状态：禁用按钮、文案改为"提交中..."
+        submitBtn.disabled = true;
+        submitBtn.querySelector("span").textContent = "提交中...";
+
+        try {
+          if (apiEndpoint) {
+            // 配置了提交接口：POST JSON 到后端
+            var res = await fetch(apiEndpoint, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ title: title, desc: desc, siteUrl: siteUrl, imgUrl: imgUrl, email: email, message: message })
+            });
+            var data = await res.json();
+            if (!res.ok) throw new Error(data.message || "提交失败");
+            if (!data.success) throw new Error(data.message || "提交失败");
+          } else {
+            // 未配置接口：使用邮件发送（调用本机邮件客户端）
+            var body =
+              "站点名称：" + title + "\n" +
+              "站点描述：" + desc + "\n" +
+              "站点链接：" + siteUrl + "\n" +
+              "头像链接：" + imgUrl +
+              (email ? "\n联系邮箱：" + email : "") +
+              (message ? "\n留言：" + message : "");
+            var mailto =
+              "mailto:" + encodeURIComponent(siteEmail) +
+              "?subject=" + encodeURIComponent("友链申请：" + title) +
+              "&body=" + encodeURIComponent(body);
+            window.location.href = mailto;
+          }
+
+          // 提交成功：隐藏步骤、显示成功提示
+          if (stepsEl) stepsEl.style.display = "none";
+          successEl.classList.remove("hidden");
+          successEl.style.display = "flex";
+        } catch (err) {
+          var msg = err.message === "Failed to fetch"
+            ? "网络连接失败，请检查网络"
+            : (err.message || "提交失败，请稍后重试");
+          showFriendToast(msg);
+        } finally {
+          // 恢复按钮状态
+          isSubmitting = false;
+          submitBtn.disabled = false;
+          submitBtn.querySelector("span").textContent = "提交申请";
+        }
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initFriendForm);
+    } else {
+      initFriendForm();
+    }
+
+    document.addEventListener("swup:contentReplaced", initFriendForm);
+    document.addEventListener("swup:content:replace", initFriendForm);
+  </script>
+
   <style is:global>
     .friends-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 0.75rem;
+    }
+
+    .friend-toast {
+      position: fixed;
+      left: 50%;
+      bottom: 2rem;
+      transform: translateX(-50%);
+      z-index: 2000;
+      background: #ef4444;
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: opacity 0.3s;
+    }
+
+    .friend-toast-hide {
+      opacity: 0;
     }
   </style>
 </MainGridLayout>

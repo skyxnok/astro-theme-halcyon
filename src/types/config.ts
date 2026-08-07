@@ -24,6 +24,7 @@ export type {
 	CalendarConfig,
 	MobileBottomComponentConfig,
 	SidebarLayoutConfig,
+	WeatherWidgetConfig,
 	WidgetComponentConfig,
 	WidgetComponentType,
 	WidgetSpecificConfig,

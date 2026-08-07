@@ -20,6 +20,7 @@ export type {
 	SponsorConfig,
 	SponsorItem,
 	SponsorMethod,
+	WeatherWidgetConfig,
 	WidgetComponentConfig,
 	WidgetComponentType,
 	WidgetSpecificConfig,
@@ -36,6 +37,8 @@ export { footerConfig } from "./footerConfig"; // 页脚配置
 export { friendsPageConfig, getEnabledFriends } from "./friendsConfig"; // 友链配置
 export { galleryConfig } from "./galleryConfig"; // 相册配置
 export { licenseConfig } from "./licenseConfig"; // 许可证配置
+export { quoteConfig } from "./quoteConfig"; // 今日一言配置
+export { relationshipConfig } from "./relationshipConfig"; // 恋爱计时配置
 // 组件配置
 export { navBarConfig, navBarSearchConfig } from "./navBarConfig"; // 导航栏配置与搜索配置
 export { plantumlConfig } from "./plantumlConfig"; // PlantUML 图表配置
