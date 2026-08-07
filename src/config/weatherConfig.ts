@@ -9,6 +9,8 @@ export type WeatherConfig = {
 	adcode?: string;
 	// 是否显示扩展信息（湿度/气压/空气质量等），默认 true
 	extended?: boolean;
+	// 高德天气 API Key（可选备用通道：uapis.cn 不可用时自动降级到高德）
+	amapKey?: string;
 };
 
 export const weatherConfig: WeatherConfig = {
@@ -16,4 +18,5 @@ export const weatherConfig: WeatherConfig = {
 		"uapi-_pusk-ngmfEcQvLV6RzUyxBj7WFivzr_evm0XbPc",
 		"uapi-ob-wmdenLZ1nhHEGX11lgwRTYZ7V-bPxAbV-S-oq",
 	],
+	amapKey: "55b9af327f8d489b214eda4153c91b33",
 };

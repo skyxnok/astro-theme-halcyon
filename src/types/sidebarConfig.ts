@@ -46,6 +46,7 @@ export type WeatherWidgetConfig = {
 	adcode?: string; // 行政区划代码，如 "110000"
 	extended?: boolean; // 是否显示扩展信息（湿度/气压/空气质量等），默认 true
 	apiKeys?: string[]; // uapis.cn API Keys 列表，覆盖全局 weatherConfig.apiKeys（轮换使用）
+	amapKey?: string; // 高德天气 API Key，覆盖全局 weatherConfig.amapKey（备用通道）
 };
 
 // 日历组件专用配置
