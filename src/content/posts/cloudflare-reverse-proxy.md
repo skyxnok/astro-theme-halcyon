@@ -6,6 +6,7 @@ description: 用 Cloudflare Workers 写一个通用反向代理，代理任意�
 tags: [Cloudflare, 教程, 代理]
 category: 教程
 draft: false
+image: /images/covers/cloudflare-reverse-proxy.avif
 ---
 
 > **合规提醒**：请先阅读 Cloudflare [服务条款](https://www.cloudflare.com/terms/)（Self-Serve Subscription Agreement 2.2.1），其中明确禁止「使用服务提供 VPN 或其他类似代理服务」。本文内容仅用于**合法场景**：自己 API 的跨域代理、静态资源加速、访问你拥有或已获授权的资源。**禁止**用于翻墙、绕过付费墙、抓取侵权内容、搭建公共梯子等用途，Cloudflare 会直接封号。免费套餐也禁止大量代理视频或不成比例的图片/音频/大文件。

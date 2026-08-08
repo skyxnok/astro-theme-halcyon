@@ -30,6 +30,7 @@ export type SlimSubject = {
 	short_summary: string; // 简介
 	date?: string | null; // 日期 YYYY-MM-DD
 	images: SubjectImages; // 图片
+	url?: string; // 条目原始链接（豆瓣条目用，优先于 subjectBaseUrl 拼接）
 	volumes: number; // 卷数
 	eps: number; // 集数
 	collection_total: number; // 收藏人数

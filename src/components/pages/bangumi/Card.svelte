@@ -65,6 +65,9 @@ const year = $derived(
 );
 const statusColor = $derived(STATUS_COLORS[item.type] || "bg-gray-500");
 const score = $derived(item.subject?.score || 0);
+const href = $derived(
+	item.subject?.url || subjectBaseUrl + (item.subject?.id ?? ""),
+);
 
 function handleLoad(e: Event) {
 	const img = e.currentTarget as HTMLImageElement;
@@ -75,7 +78,7 @@ function handleLoad(e: Event) {
 </script>
 
 <a
-  href="{subjectBaseUrl}{item.subject?.id}"
+  href={href}
   target="_blank"
   rel="noopener noreferrer nofollow"
   class="group relative overflow-hidden rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-[1.02] block"
