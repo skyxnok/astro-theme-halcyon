@@ -150,8 +150,8 @@ export const siteConfig: SiteConfig = {
 		// static 模式在构建时获取数据并静态渲染，部署后数据不更新
 		// dynamic 模式在浏览器中实时请求 API，始终显示最新数据
 		mode: "dynamic",
-		// 数据 API 地址（bangumi-data-api Worker：Bangumi + 豆瓣合并数据）
-		apiUrl: "https://bangumi-data-api.shyxnok.workers.dev",
+		// 数据 API 地址（bangumi-data-api Worker 自定义域名：Bangumi + 豆瓣合并数据）
+		apiUrl: "https://data.201562.xyz",
 		// 详情页地址
 		subjectBaseUrl: "https://shyxnok.dpdns.org/subject/",
 		// 条目类型排序，数组中的类型将按顺序优先展示
