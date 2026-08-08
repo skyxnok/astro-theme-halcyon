@@ -153,7 +153,7 @@ export const siteConfig: SiteConfig = {
 		// 数据 API 地址（bangumi-data-api Worker 自定义域名：Bangumi + 豆瓣合并数据）
 		apiUrl: "https://data.201562.xyz",
 		// 详情页地址
-		subjectBaseUrl: "https://shyxnok.dpdns.org/subject/",
+		subjectBaseUrl: "https://bgm.tv/subject/",
 		// 条目类型排序，数组中的类型将按顺序优先展示
 		// 可选值: "anime" | "book" | "music" | "game" | "real" (暂不支持"real"类型)
 		// 未列出的类型将按默认顺序排在后面
