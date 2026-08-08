@@ -106,7 +106,7 @@ const COLLAPSED_HEIGHT = "9rem";
 			<div class="weather-extended" data-weather-extended>
 				<!-- 第一行：风力和能见度 -->
 				<div class="extended-item">
-					<Icon name="material-symbols:air" class="extended-icon icon-wind" />
+					<Icon name="material-symbols:air" is:inline class="extended-icon icon-wind" />
 					<div class="extended-content">
 						<span class="extended-label">风力</span>
 						<span class="extended-value" data-wind>--</span>
@@ -170,14 +170,14 @@ const COLLAPSED_HEIGHT = "9rem";
 				</div>
 				<!-- 第五行：降水量和降水概率 -->
 				<div class="extended-item">
-					<Icon name="material-symbols:rainy" class="extended-icon icon-precipitation" />
+					<Icon name="material-symbols:rainy" is:inline class="extended-icon icon-precipitation" />
 					<div class="extended-content">
 						<span class="extended-label">降水量</span>
 						<span class="extended-value" data-precipitation>--mm</span>
 					</div>
 				</div>
 				<div class="extended-item">
-					<Icon name="material-symbols:water-drop" class="extended-icon icon-pop" />
+					<Icon name="material-symbols:water-drop" is:inline class="extended-icon icon-pop" />
 					<div class="extended-content">
 						<span class="extended-label">降水概率</span>
 						<span class="extended-value" data-pop>--%</span>
@@ -185,7 +185,7 @@ const COLLAPSED_HEIGHT = "9rem";
 				</div>
 				<!-- 第六行：日出和日落 -->
 				<div class="extended-item">
-					<Icon name="material-symbols:wb-sunny" class="extended-icon icon-sunrise" />
+					<Icon name="material-symbols:wb-sunny" is:inline class="extended-icon icon-sunrise" />
 					<div class="extended-content">
 						<span class="extended-label">日出</span>
 						<span class="extended-value" data-sunrise>--:--</span>
@@ -617,6 +617,9 @@ const COLLAPSED_HEIGHT = "9rem";
 <script is:inline define:vars={{ city, adcode, CACHE_KEY, CACHE_DURATION, extended, apiKeys, amapKey }}>
 	(function () {
 		const API_URL = "https://uapis.cn/api/v1/misc/weather?";
+		// base.itab.link 免 key 天气接口（自动降级通道）
+		const ITAB_CITY_API = "https://base.itab.link/api/weather/city";
+		const ITAB_WEATHER_API = "https://base.itab.link/api/getWeather";
 
 		// 缓存管理
 		const cacheManager = {
@@ -729,6 +732,106 @@ const COLLAPSED_HEIGHT = "9rem";
 			return mapAmapData(amapData);
 		}
 
+		// QWeather 天气代码 -> 组件内置图标码（模板预渲染了 100-104 / 200-210）
+		function normalizeWeatherIcon(code) {
+			const c = String(code);
+			if (/^(30[0-9]|31[0-3])$/.test(c)) return "203"; // 阵雨/雷阵雨/雨
+			if (/^4\d\d$/.test(c)) return "207"; // 雪
+			if (/^5\d\d$/.test(c)) return "200"; // 雾/霾/沙尘
+			if (/^1\d\d$/.test(c)) {
+				// 夜间代码 150-154 映射到对应白天图标
+				const nightMap = { "150": "100", "151": "101", "152": "102", "153": "103", "154": "104" };
+				return nightMap[c] || c;
+			}
+			return c; // 100-104 / 200-210 直接透传
+		}
+
+		/** 空气质量指数 -> 组件等级（1 优 / 2 良 / 3+ 污染） */
+		function mapAqiLevel(aqi) {
+			const n = Number(aqi);
+			if (isNaN(n)) return null;
+			if (n <= 50) return 1;
+			if (n <= 100) return 2;
+			return 3;
+		}
+
+		// itab 响应 -> 组件数据结构（接口无体感/能见度/紫外线/云量/污染物，缺失项显示 "--"）
+		function mapItabData(data, cityName) {
+			const now = data.now || {};
+			const air = data.air_now_city || {};
+			const sun = data.sun || {};
+			const forecast = (data.daily_forecast || []).map((d) => ({
+				date: d.date || "",
+				sunrise: "",
+				sunset: "",
+				pop: null,
+				temp_max: d.tmp_max != null ? d.tmp_max : null,
+				temp_min: d.tmp_min != null ? d.tmp_min : null,
+			}));
+			if (forecast.length > 0) {
+				forecast[0].sunrise = sun.rise || "";
+				forecast[0].sunset = sun.set || "";
+			}
+			return {
+				city: cityName || "当前位置",
+				district: "",
+				weather: now.cond_txt || "",
+				weather_icon: normalizeWeatherIcon(now.cond_code),
+				temperature: now.tmp,
+				wind_direction: now.wind_dir || "",
+				wind_power: now.wind_sc || "",
+				humidity: now.hum,
+				report_time: "",
+				temp_max: forecast[0] ? forecast[0].temp_max : null,
+				temp_min: forecast[0] ? forecast[0].temp_min : null,
+				forecast,
+				feels_like: null,
+				visibility: null,
+				pressure: now.pres,
+				uv: null,
+				precipitation: now.pcpn,
+				cloud: null,
+				aqi: air.aqi,
+				aqi_category: air.qlty || "",
+				aqi_level: mapAqiLevel(air.aqi),
+				air_pollutants: {},
+			};
+		}
+
+		// itab 天气通道：配置了 city 时先查城市 ID，否则按 IP 自动定位
+		async function fetchItabWeather() {
+			let location = "";
+			let cityName = "";
+
+			if (city) {
+				const res = await fetch(ITAB_CITY_API + "?lang=cn&location=" + encodeURIComponent(city));
+				if (!res.ok) throw new Error("城市查询失败: " + res.status);
+				const json = await res.json();
+				const list = (json && json.data) || [];
+				const match = list.find((c) => c.name === city) || list[0];
+				if (!match) throw new Error("未找到城市: " + city);
+				location = match.id;
+				cityName = match.adm2 === match.name ? match.name : `${match.adm2}·${match.name}`;
+			} else if (adcode) {
+				// adcode 可能是高德行政区划代码，查询不到则抛错降级到高德通道
+				const res = await fetch(ITAB_CITY_API + "?lang=cn&location=" + encodeURIComponent(adcode));
+				if (!res.ok) throw new Error("城市查询失败: " + res.status);
+				const json = await res.json();
+				const list = (json && json.data) || [];
+				const match = list[0];
+				if (!match) throw new Error("未找到城市: " + adcode);
+				location = match.id;
+				cityName = match.name;
+			}
+
+			const url = ITAB_WEATHER_API + "?lang=cn" + (location ? "&location=" + encodeURIComponent(location) : "");
+			const res = await fetch(url);
+			if (!res.ok) throw new Error("天气请求失败: " + res.status);
+			const json = await res.json();
+			if (!json || json.code !== 200 || !json.data) throw new Error("天气数据为空");
+			return mapItabData(json.data, cityName);
+		}
+
 		// 获取天气数据 - 支持 IP 自动定位，uapis.cn 失败时自动降级到高德
 		async function fetchWeather() {
 			const params = new URLSearchParams();
@@ -759,7 +862,13 @@ const COLLAPSED_HEIGHT = "9rem";
 					throw new Error(data.error);
 				}
 			} catch (e) {
-				data = await fetchAmapFallback();
+				try {
+					// uapis.cn 不可用时降级到 base.itab.link（无需 key）
+					data = await fetchItabWeather();
+				} catch (e2) {
+					// 最后降级到高德
+					data = await fetchAmapFallback();
+				}
 			}
 
 			// 缓存 15 分钟（IP 定位也缓存，避免频繁请求消耗 API 额度；重试按钮会清除缓存）
