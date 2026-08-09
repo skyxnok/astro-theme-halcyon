@@ -92,25 +92,25 @@ export const friendsConfig: FriendLink[] = [
     desc: "记录我的二次元之旅",
     siteurl: "https://qwq.sigrika.cc/",
     imgurl: "https://qwq.sigrika.cc/assets/images/avatar.gif",
-	tags: ["Astro"],
+    tags: ["Astro"],
     weight: 8,
     enabled: true,
   },
-    {
+  {
     title: "Nachcekoの小窝",
     desc: "1つの熱愛の2次元の小さい萌の新しい~ /.こんにちはnya~です",
     siteurl: "https://blog.nachceko.qzz.io",
     imgurl: "https://avatars.githubusercontent.com/u/172878250?v=4",
-	tags: ["Astro"],
+    tags: ["Astro"],
     weight: 8,
     enabled: true,
   },
-     {
+  {
     title: "Hyde Blog",
     desc: "人心中的成见是一座大山",
     siteurl: "https://seasir.top",
     imgurl: "https://seasir.top/assets/avatar.avif",
-	tags: ["Astro"],
+    tags: ["Astro"],
     weight: 8,
     enabled: true,
   },
@@ -118,7 +118,17 @@ export const friendsConfig: FriendLink[] = [
     title: "二叉树树",
     desc: "二叉树树的个人网站 —— 包含技术博客、论坛社区、AI 生图、实用在线工具等",
     siteurl: "https://2x.nz",
-    imgurl: "https://q2.qlogo.cn/headimg_dl?dst_uin=2726730791&spec=140&t=1786118393856",
+    imgurl:
+      "https://q2.qlogo.cn/headimg_dl?dst_uin=2726730791&spec=140&t=1786118393856",
+    tags: ["Blog"],
+    weight: 8,
+    enabled: true,
+  },
+  {
+    title: "Bai'Blog", // 博客名称
+    siteurl: "https://baiblog.vip", // 博客地址
+    desc: "Actions speak louder than words", // 博客描述
+    imgurl: "https://baiblog.vip/images/5.png", // 博客头像
     tags: ["Blog"],
     weight: 8,
     enabled: true,
