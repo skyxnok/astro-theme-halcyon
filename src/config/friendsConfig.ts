@@ -148,6 +148,22 @@ export const friendsConfig: FriendLink[] = [
     tags: ["Blog"],
     weight: 8,
     enabled: true,
+  },  {
+    title: "我剑也未尝不利", // 博客名称
+    siteurl: "https://tch.cool", // 博客地址
+    desc: "对所有的烦恼说拜拜，对所有的快乐说嗨嗨~", // 博客描述
+    imgurl: "/images/friends/tch-cool.avif", // 博客头像
+    tags: ["Blog"],
+    weight: 8,
+    enabled: true,
+  },{
+    title: "益友网站", // 博客名称
+    siteurl: "https://www.yiyou.bj.cn", // 博客地址
+    desc: "记生活点滴，留岁月温柔。", // 博客描述
+    imgurl: "/images/friends/yiyou-bj-cn.avif", // 博客头像
+    tags: ["Blog"],
+    weight: 8,
+    enabled: true,
   },
 
 ];
