@@ -106,10 +106,18 @@ for (const { url, title } of jobs) {
 	}
 }
 
-// 清理不再被引用的旧头像文件
+// 配置里已经引用的本地头像路径（清理时必须保留）
+const localRefs = new Set(
+	[...noComments.matchAll(/imgurl:\s*(["'])(\/images\/friends\/[^"']+)\1/g)].map(
+		(m) => m[2],
+	),
+);
+
+// 清理不再被引用的旧头像文件：只删「既不是本次新下载、配置里也不再引用」的文件
 if (existsSync(OUT_DIR)) {
 	for (const f of readdirSync(OUT_DIR)) {
-		if (!localPaths.includes(`/images/friends/${f}`)) {
+		const p = `/images/friends/${f}`;
+		if (!localPaths.includes(p) && !localRefs.has(p)) {
 			rmSync(join(OUT_DIR, f), { force: true });
 			console.log(`🗑️ 清理未引用文件: ${f}`);
 		}
