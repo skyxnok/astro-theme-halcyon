@@ -6,6 +6,7 @@ description: 从 Windows 切换到 Mac 的真实体验：便携、长续航、�
 tags: [Mac, 随笔]
 category: 随笔
 draft: false
+
 image: /images/covers/why-i-use-mac.avif
 ---
 
