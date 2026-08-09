@@ -73,7 +73,7 @@ export const friendsConfig: FriendLink[] = [
     title: "Firefly Docs",
     desc: "Firefly主题模板文档",
     siteurl: "https://docs-firefly.cuteleaf.cn",
-    imgurl: "https://docs-firefly.cuteleaf.cn/logo.png",
+    imgurl: "/images/friends/firefly-docs.avif",
     tags: ["Docs"],
     weight: 10,
     enabled: true,
@@ -82,7 +82,7 @@ export const friendsConfig: FriendLink[] = [
     title: "Mizuki-Ultra",
     desc: "一个简约&功能丰富的 Astro 博客 主题",
     siteurl: "https://docs.mizuki.mysqil.com/",
-    imgurl: "https://docs.mizuki.mysqil.com/favicon.png",
+    imgurl: "/images/friends/mizuki-ultra.avif",
     tags: ["Docs"],
     weight: 8,
     enabled: true,
@@ -91,7 +91,7 @@ export const friendsConfig: FriendLink[] = [
     title: "Sigrika-善良耙耙柑🍊",
     desc: "记录我的二次元之旅",
     siteurl: "https://qwq.sigrika.cc/",
-    imgurl: "https://qwq.sigrika.cc/assets/images/avatar.gif",
+    imgurl: "/images/friends/sigrika.webp",
     tags: ["Astro"],
     weight: 8,
     enabled: true,
@@ -100,7 +100,7 @@ export const friendsConfig: FriendLink[] = [
     title: "Nachcekoの小窝",
     desc: "1つの熱愛の2次元の小さい萌の新しい~ /.こんにちはnya~です",
     siteurl: "https://blog.nachceko.qzz.io",
-    imgurl: "https://avatars.githubusercontent.com/u/172878250?v=4",
+    imgurl: "/images/friends/nachceko.avif",
     tags: ["Astro"],
     weight: 8,
     enabled: true,
@@ -109,7 +109,7 @@ export const friendsConfig: FriendLink[] = [
     title: "Hyde Blog",
     desc: "人心中的成见是一座大山",
     siteurl: "https://seasir.top",
-    imgurl: "https://seasir.top/assets/avatar.avif",
+    imgurl: "/images/friends/hyde-blog.avif",
     tags: ["Astro"],
     weight: 8,
     enabled: true,
@@ -119,7 +119,7 @@ export const friendsConfig: FriendLink[] = [
     desc: "二叉树树的个人网站 —— 包含技术博客、论坛社区、AI 生图、实用在线工具等",
     siteurl: "https://2x.nz",
     imgurl:
-      "https://q2.qlogo.cn/headimg_dl?dst_uin=2726730791&spec=140&t=1786118393856",
+      "/images/friends/q2-qlogo-cn.avif",
     tags: ["Blog"],
     weight: 8,
     enabled: true,
@@ -128,7 +128,7 @@ export const friendsConfig: FriendLink[] = [
     title: "Bai'Blog", // 博客名称
     siteurl: "https://baiblog.vip", // 博客地址
     desc: "Actions speak louder than words", // 博客描述
-    imgurl: "https://baiblog.vip/images/5.png", // 博客头像
+    imgurl: "/images/friends/bai-blog.avif", // 博客头像
     tags: ["Blog"],
     weight: 8,
     enabled: true,

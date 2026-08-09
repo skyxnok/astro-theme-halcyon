@@ -6,7 +6,7 @@
 		"dev": "astro dev",
 		"start": "astro dev",
 		"check": "astro check",
-		"build": "node scripts/auto-cover.js && node scripts/generate-icons.js && npx tsx scripts/generate-lqips.ts && astro build && pagefind --site dist",
+		"build": "node scripts/auto-cover.js && node scripts/sync-friend-avatars.js && node scripts/generate-icons.js && npx tsx scripts/generate-lqips.ts && astro build && pagefind --site dist",
 		"build:cf": "BUILD_PLATFORM=\"Cloudflare Workers\" pnpm build && wrangler deploy",
 		"preview": "astro preview",
 		"astro": "astro",
