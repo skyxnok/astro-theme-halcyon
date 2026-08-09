@@ -48,7 +48,7 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 			// 相册
 			LinkPresets.Gallery,
 
-			// 番组计划
+			// 观阅计划
 			LinkPresets.Bangumi,
 		],
 	});
@@ -121,7 +121,7 @@ export const LinkPresets: Record<string, NavBarLink> = {
 		icon: "material-symbols:person",
 	},
 	Bangumi: {
-		name: "番组计划",
+		name: "观阅计划",
 		url: "/bangumi/",
 		icon: "material-symbols:movie",
 	},

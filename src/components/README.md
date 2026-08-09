@@ -91,10 +91,10 @@ halcyon 项目中所有可复用组件的集中管理。组件按照功能和职
 
 - `AdvancedSearch.svelte` - 高级搜索组件
 
-**pages/bangumi/** - 番组计划页面组件
-- `BangumiGrid.svelte` - 番组网格布局组件
-- `BangumiSection.astro` - 番组分类展示组件
-- `Card.svelte` - 番组卡片组件
+**pages/bangumi/** - 观阅计划页面组件
+- `BangumiGrid.svelte` - 观阅网格布局组件
+- `BangumiSection.astro` - 观阅分类展示组件
+- `Card.svelte` - 观阅卡片组件
 - `FilterControls.svelte` - 筛选控制组件
 - `TabNav.svelte` - 标签导航组件
 

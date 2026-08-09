@@ -60,7 +60,7 @@ enum I18nKey {
 	guestbookDescription = "guestbookDescription",
 	bangumi = "bangumi",
 
-	// 番组计划筛选和状态文本
+	// 观阅计划筛选和状态文本
 	bangumiTitle = "bangumiTitle",
 	bangumiSubtitle = "bangumiSubtitle",
 	bangumiFilterAll = "bangumiFilterAll",
@@ -106,18 +106,18 @@ enum I18nKey {
 	bangumiTotalPages = "bangumiTotalPages",
 	bangumiPage = "bangumiPage",
 
-	// 番组错误
+	// 观阅错误
 	bangumiFetchError = "bangumiFetchError",
 	bangumiFetchErrorDesc = "bangumiFetchErrorDesc",
 
-	// 番组分类
+	// 观阅分类
 	bangumiCategoryBook = "bangumiCategoryBook",
 	bangumiCategoryAnime = "bangumiCategoryAnime",
 	bangumiCategoryMusic = "bangumiCategoryMusic",
 	bangumiCategoryGame = "bangumiCategoryGame",
 	bangumiCategoryReal = "bangumiCategoryReal",
 
-	// 番组数据更新
+	// 观阅数据更新
 	bangumiLastUpdated = "bangumiLastUpdated",
 	bangumiUpdatedAt = "bangumiUpdatedAt",
 	bangumiDataStatic = "bangumiDataStatic",

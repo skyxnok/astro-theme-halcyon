@@ -1,20 +1,20 @@
 ---
-title: 番组计划数据管线：Bangumi + 豆瓣收藏同步实践
+title: 观阅计划数据管线：Bangumi + 豆瓣收藏同步实践
 published: 2026-08-09T12:00:00+08:00
 pinned: false
 description: 用 GitHub Actions 定时同步 Bangumi 与豆瓣收藏，封面转 AVIF 走 CDN，Cloudflare Worker 提供 API，事务化更新保证数据安全——完整实践与踩坑记录。
-tags: [番组计划, Bangumi, 豆瓣, GitHub Actions, Cloudflare Worker]
+tags: [观阅计划, Bangumi, 豆瓣, GitHub Actions, Cloudflare Worker]
 category: 教程
 draft: false
 
 image: /images/covers/bangumi-douban-sync.avif
 ---
 
-> 本文记录我博客「番组计划」页面背后的数据管线：如何同时拿到 **Bangumi** 和 **豆瓣** 的收藏数据，把封面压缩成 AVIF 走 CDN，再通过 Cloudflare Worker 提供给前端。数据同步是**事务化**的——全部分类成功才更新仓库，失败自动回滚，绝不让线上数据变成半成品。
+> 本文记录我博客「观阅计划」页面背后的数据管线：如何同时拿到 **Bangumi** 和 **豆瓣** 的收藏数据，把封面压缩成 AVIF 走 CDN，再通过 Cloudflare Worker 提供给前端。数据同步是**事务化**的——全部分类成功才更新仓库，失败自动回滚，绝不让线上数据变成半成品。
 
 ## 背景：为什么需要这么一套东西
 
-我的博客有一个「番组计划」页面，用来展示看过的动画、读过的书、玩过的游戏和看过的电影。但有两个问题：
+我的博客有一个「观阅计划」页面，用来展示看过的动画、读过的书、玩过的游戏和看过的电影。但有两个问题：
 
 1. **数据源分裂**：动画和游戏我主要用 Bangumi 记录，书和电影主要在豆瓣标记，两个平台的收藏没法互通；
 2. **访问不稳定**：Bangumi 的 API 在国内直连经常超时，豆瓣又没有公开的官方 API。
@@ -42,7 +42,7 @@ image: /images/covers/bangumi-douban-sync.avif
         │  Cloudflare Worker（data.201562.xyz）│
         └────────────────┬─────────────────┘
                          ▼
-                 博客「番组计划」页面
+                 博客「观阅计划」页面
 ```
 
 简单说就是三件事：**同步**（GitHub Actions 拉数据）、**托管**（GitHub 仓库存 JSON + 封面图）、**投喂**（Worker 把数据变成博客能用的 API）。
@@ -141,7 +141,7 @@ for (const cat of CATEGORIES) writeDataFile(cat.key, results[cat.key]); // 再�
 - 把 `images/...` 相对路径改写成同源 `/images/...` 完整地址，图片同样由 Worker 代理回源；
 - 返回带 **CORS** 头（浏览器跨域需要）的 JSON；数据缓存 5 分钟、图片缓存 1 天（`?refresh=1` 可强制回源）。
 
-博客端「番组计划」页面用的是动态模式，每次打开页面实时请求 Worker，所以数据同步完刷新页面就能看到最新收藏，完全不需要重新构建博客。
+博客端「观阅计划」页面用的是动态模式，每次打开页面实时请求 Worker，所以数据同步完刷新页面就能看到最新收藏，完全不需要重新构建博客。
 
 ## 日常维护
 

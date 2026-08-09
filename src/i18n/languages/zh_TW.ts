@@ -61,13 +61,13 @@ export const zh_TW: Translation = {
 	[Key.updatedAt]: "更新於",
 	[Key.readTime]: "閱讀時長",
 	[Key.license]: "許可協議",
-	[Key.bangumi]: "番組計劃",
+	[Key.bangumi]: "觀閱計劃",
 
-	// 番組計劃
-	[Key.bangumiTitle]: "我的番組計劃",
-	[Key.bangumiSubtitle]: "記錄我的二次元之旅",
+	// 觀閱計劃
+	[Key.bangumiTitle]: "我的觀閱計劃",
+	[Key.bangumiSubtitle]: "記錄我的觀閱足跡",
 
-	// 番組計劃篩選和狀態文本
+	// 觀閱計劃篩選和狀態文本
 	[Key.bangumiFilterAll]: "全部",
 	[Key.bangumiFilterWatched]: "看過",
 	[Key.bangumiFilterWatching]: "在看",
@@ -114,14 +114,14 @@ export const zh_TW: Translation = {
 	[Key.bangumiTotalPages]: "頁，共",
 	[Key.bangumiPage]: "頁",
 
-	// 番組分類
+	// 觀閱分類
 	[Key.bangumiCategoryBook]: "書籍",
 	[Key.bangumiCategoryAnime]: "動畫",
 	[Key.bangumiCategoryMusic]: "音樂",
 	[Key.bangumiCategoryGame]: "遊戲",
 	[Key.bangumiCategoryReal]: "三次元",
 
-	// 番組數據更新
+	// 觀閱數據更新
 	[Key.bangumiLastUpdated]: "數據更新於",
 	[Key.bangumiUpdatedAt]: "構建時間",
 	[Key.bangumiDataStatic]: "靜態數據",

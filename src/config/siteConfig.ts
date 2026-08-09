@@ -91,7 +91,7 @@ export const siteConfig: SiteConfig = {
 		sponsor: true,
 		// 留言板页面开关，需要配置评论系统
 		guestbook: true,
-		// 番组计划页面开关，含追番、游戏、书籍和音乐
+		// 观阅计划页面开关，含追番、游戏、书籍和音乐
 		bangumi: true,
 		// 相册页面开关
 		gallery: true,
