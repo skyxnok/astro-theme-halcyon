@@ -132,7 +132,24 @@ export const friendsConfig: FriendLink[] = [
     tags: ["Blog"],
     weight: 8,
     enabled: true,
+  },  {
+    title: "孤久きりのなか", // 博客名称
+    siteurl: "https://zcx0217.qzz.io/", // 博客地址
+    desc: "生当作人杰，死亦为鬼雄。", // 博客描述
+    imgurl: "https://zcx0217.qzz.io/images/avatar.jpg", // 博客头像
+    tags: ["Blog"],
+    weight: 8,
+    enabled: true,
+  },  {
+    title: "ElysiumStack", // 博客名称
+    siteurl: "https://blog.elysium-stack.cn/", // 博客地址
+    desc: "不会摄影的设计师不是优秀的旅行家", // 博客描述
+    imgurl: "https://weavatar.com/avatar/4B224B7FC28787D78FB6374E17E2F15C?s=640", // 博客头像
+    tags: ["Blog"],
+    weight: 8,
+    enabled: true,
   },
+
 ];
 
 // 获取启用的友链并进行排序
