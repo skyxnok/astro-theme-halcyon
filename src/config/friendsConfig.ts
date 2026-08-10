@@ -180,8 +180,15 @@ export const friendsConfig: FriendLink[] = [
     tags: ["Blog"],
     weight: 8,
     enabled: true,
+  },{
+    title: "Fqzlr Blog", // 博客名称
+    siteurl: "https://fqzlr.com/", // 博客地址
+    desc: "躬身入局，心为主理，行有尺度，自持本心.", // 博客描述
+    imgurl: "https://q1.qlogo.cn/g?b=qq&nk=20447289&s=640", // 博客头像
+    tags: ["Blog"],
+    weight: 8,
+    enabled: true,
   },
-
 ];
 
 // 获取启用的友链并进行排序
