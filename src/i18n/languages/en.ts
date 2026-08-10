@@ -315,6 +315,36 @@ export const en: Translation = {
 	[Key.galleryBackToAlbums]: "Back to albums",
 	[Key.searchAlbums]: "Search albums...",
 
+	[Key.sports]: "Sports",
+	[Key.sportsDescription]: "Tracking my workouts and activities",
+	[Key.travel]: "Travel",
+	[Key.travelDescription]: "Stories and views from the road",
+	[Key.pageComingSoon]: "Content is being prepared, stay tuned",
+
+	[Key.sportsTotalSessions]: "Sessions",
+	[Key.sportsTotalDuration]: "Total Time",
+	[Key.sportsTotalDistance]: "Total Distance",
+	[Key.sportsTotalCalories]: "Calories Burned",
+	[Key.sportsMinutes]: "min",
+
+	[Key.sportsSeconds]: "s",
+	[Key.sportsHours]: "h",
+	[Key.sportsKm]: "km",
+	[Key.sportsKcal]: "kcal",
+	[Key.sportsNoRecords]: "No sports records yet. Time to move!",
+
+	[Key.sportsNoPhotos]: "No photos yet",
+	[Key.sportsBack]: "Back to sports",
+
+	[Key.sportsTrack]: "Track",
+
+	[Key.travelTrips]: "Trips",
+	[Key.travelTotalDays]: "Total Days",
+	[Key.travelDays]: "days",
+	[Key.travelTrack]: "Trip Track",
+	[Key.travelNoRecords]: "No trips yet. Go see the world!",
+	[Key.travelBack]: "Back to travel",
+
 	// Password Protection
 	[Key.passwordProtected]: "Password Protected",
 	[Key.passwordProtectedDesc]:

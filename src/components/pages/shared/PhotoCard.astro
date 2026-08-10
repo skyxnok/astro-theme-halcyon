@@ -1,0 +1,26 @@
+---
+import { getLqipProps } from "@/utils/lqip-utils";
+
+interface Props {
+	src: string;
+	alt?: string;
+}
+
+const { src, alt = "" } = Astro.props;
+
+// LQIP 渐变占位
+const lqipProps = getLqipProps(src, undefined, true);
+---
+
+<div>
+  <div class="block rounded-xl overflow-hidden relative">
+    <div class="lqip-placeholder absolute inset-0 pointer-events-none" style={lqipProps.style} aria-hidden="true"></div>
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+      class="w-full h-auto opacity-0 transition-all duration-500 ease-out"
+    />
+  </div>
+</div>

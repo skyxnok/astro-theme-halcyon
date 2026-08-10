@@ -1,0 +1,200 @@
+---
+import { Icon } from "astro-icon/components";
+import { getCollection, render } from "astro:content";
+import { siteConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import { formatDateI18n } from "@/utils/date-utils";
+import { url } from "@/utils/url-utils";
+
+// 检查页面是否启用
+if (!siteConfig.pages.travel) {
+	return Astro.redirect("/404/");
+}
+
+const title = i18n(I18nKey.travel);
+const description = i18n(I18nKey.travelDescription);
+
+// 读取旅行记录并按出发日期倒序
+const records = (await getCollection("travel")).sort(
+	(a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+
+// 渲染每条记录的正文（取第一段做摘要展示由模板决定，这里整段渲染会太长，改为只渲染，模板里控制）
+const noteContents = new Map<string, any>();
+for (const r of records) {
+	const { Content } = await render(r);
+	noteContents.set(r.id, Content);
+}
+
+// 汇总统计
+const totalTrips = records.length;
+const totalDays = records.reduce((s, r) => s + (r.data.days ?? 1), 0);
+
+// 按年份分组
+const localeMap: Record<string, string> = {
+	zh_CN: "zh-CN",
+	zh_TW: "zh-TW",
+	en: "en-US",
+	ja: "ja-JP",
+	ru: "ru-RU",
+};
+const locale = localeMap[siteConfig.lang || "en"] || "en-US";
+const yearGroups = new Map<number, typeof records>();
+for (const r of records) {
+	const year = r.data.date.getFullYear();
+	if (!yearGroups.has(year)) yearGroups.set(year, []);
+	yearGroups.get(year)!.push(r);
+}
+const yearLabel = (year: number) =>
+	new Date(year, 0, 1).toLocaleDateString(locale, { year: "numeric" });
+
+// 日期范围
+const fmtRange = (r: (typeof records)[number]) => {
+	const start = r.data.date;
+	const end = new Date(start.getTime() + (r.data.days - 1) * 86400000);
+	return r.data.days > 1
+		? `${formatDateI18n(start)} ~ ${formatDateI18n(end)}`
+		: formatDateI18n(start);
+};
+
+const stats = [
+	{
+		label: i18n(I18nKey.travelTrips),
+		value: String(totalTrips),
+		icon: "material-symbols:map",
+	},
+	{
+		label: i18n(I18nKey.travelTotalDays),
+		value: `${totalDays}${i18n(I18nKey.travelDays)}`,
+		icon: "material-symbols:calendar-month",
+	},
+];
+---
+
+<MainGridLayout title={title} description={description}>
+  <div
+    class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32"
+  >
+    <div class="card-base z-10 px-9 py-6 relative w-full">
+      <!-- 页面标题和描述 -->
+      <div class="mb-6">
+        <div class="flex items-center gap-3 mb-3">
+          <div
+            class="h-8 w-8 rounded-lg bg-(--primary) flex items-center justify-center text-white dark:text-black/70"
+          >
+            <Icon name="material-symbols:flight" class="text-[1.5rem]" />
+          </div>
+          <div class="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+            {title}
+          </div>
+        </div>
+        {description && (
+          <p class="text-base text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+            {description}
+          </p>
+        )}
+      </div>
+
+      <!-- 统计卡片 -->
+      <div class="grid grid-cols-2 gap-3">
+        {stats.map((s) => (
+          <div
+            class="rounded-xl border border-(--line-divider) p-4 text-center"
+          >
+            <Icon name={s.icon} class="text-[1.75rem] text-(--primary) mx-auto mb-2" />
+            <div
+              class="text-xl font-bold text-neutral-900 dark:text-neutral-100 leading-tight"
+            >
+              {s.value}
+            </div>
+            <div class="text-sm text-(--content-meta) mt-1">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- 时间线 -->
+  {records.length > 0 ? (
+    <div class="card-base z-10 px-9 py-6 relative w-full mt-4">
+      {[...yearGroups.entries()].map(([year, list]) => (
+        <div class="mb-8 last:mb-0">
+          <div class="flex items-center gap-3 mb-5">
+            <span class="text-lg font-bold text-neutral-900 dark:text-neutral-100">
+              {yearLabel(year)}
+            </span>
+            <span class="h-px flex-1 bg-(--line-divider)"></span>
+          </div>
+
+          <div class="relative">
+            <div
+              class="absolute left-4 top-2 bottom-2 w-px bg-(--line-divider)"
+            ></div>
+            <div class="space-y-7">
+              {list.map((r) => {
+                const Note = noteContents.get(r.id);
+                return (
+                <div class="relative pl-12">
+                  <a
+                    href={url(`/travel/${r.id}/`)}
+                    class="block rounded-xl -m-1 p-1 transition-colors duration-200 hover:bg-(--btn-regular-bg)/60"
+                  >
+                    <!-- 时间轴节点 -->
+                    <div
+                      class="absolute left-0 top-0 h-8 w-8 rounded-full bg-(--primary) flex items-center justify-center text-white dark:text-black/70"
+                    >
+                      <Icon name="material-symbols:location-on" class="text-[1.1rem]" />
+                    </div>
+
+                    <div>
+                      <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mb-1.5">
+                        <span class="font-bold text-neutral-900 dark:text-neutral-100">
+                          {r.data.place}
+                        </span>
+                        <span
+                          class="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs bg-(--btn-regular-bg) text-(--content-meta)"
+                        >
+                          <Icon name="material-symbols:calendar-month" class="text-sm" />
+                          {fmtRange(r)}
+                        </span>
+                        <span
+                          class="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs bg-(--btn-regular-bg) text-(--content-meta)"
+                        >
+                          <Icon name="material-symbols:schedule" class="text-sm" />
+                          {r.data.days}{i18n(I18nKey.travelDays)}
+                        </span>
+                      </div>
+
+                      {r.body?.trim() && (
+                        <div class="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2">
+                          <Note />
+                        </div>
+                      )}
+                    </div>
+                  </a>
+                </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <div class="card-base p-8 mb-6 relative overflow-hidden mt-4">
+      <div class="text-center py-16 text-(--content-meta)">
+        <div
+          class="w-16 h-16 mx-auto mb-4 rounded-full bg-(--btn-regular-bg) flex items-center justify-center"
+        >
+          <Icon
+            name="material-symbols:flight"
+            class="w-8 h-8 text-(--primary)"
+          />
+        </div>
+        <p class="text-base">{i18n(I18nKey.travelNoRecords)}</p>
+      </div>
+    </div>
+  )}
+</MainGridLayout>

@@ -84,6 +84,8 @@ export type SiteConfig = {
 		guestbook: boolean; // 留言板页面开关
 		bangumi: boolean;
 		gallery: boolean; // 相册页面开关
+		sports: boolean; // 运动页面开关
+		travel: boolean; // 旅游页面开关
 	};
 
 	// 分类导航栏开关

@@ -306,6 +306,36 @@ export const zh_CN: Translation = {
 	[Key.galleryBackToAlbums]: "返回相册列表",
 	[Key.searchAlbums]: "搜索相簿...",
 
+	[Key.sports]: "运动",
+	[Key.sportsDescription]: "记录我的运动足迹",
+	[Key.travel]: "旅游",
+	[Key.travelDescription]: "记录旅途中的风景与故事",
+	[Key.pageComingSoon]: "内容整理中，敬请期待",
+
+	[Key.sportsTotalSessions]: "总次数",
+	[Key.sportsTotalDuration]: "总时长",
+	[Key.sportsTotalDistance]: "总距离",
+	[Key.sportsTotalCalories]: "总消耗",
+	[Key.sportsMinutes]: "分钟",
+
+	[Key.sportsSeconds]: "秒",
+	[Key.sportsHours]: "小时",
+	[Key.sportsKm]: "公里",
+	[Key.sportsKcal]: "千卡",
+	[Key.sportsNoRecords]: "暂无运动记录，去跑起来吧！",
+
+	[Key.sportsNoPhotos]: "暂无照片",
+	[Key.sportsBack]: "返回运动记录",
+
+	[Key.sportsTrack]: "运动轨迹",
+
+	[Key.travelTrips]: "旅行次数",
+	[Key.travelTotalDays]: "累计天数",
+	[Key.travelDays]: "天",
+	[Key.travelTrack]: "旅行轨迹",
+	[Key.travelNoRecords]: "暂无旅行记录，去看看世界吧！",
+	[Key.travelBack]: "返回旅行记录",
+
 	// 密码保护
 	[Key.passwordProtected]: "密码保护",
 	[Key.passwordProtectedDesc]: "此内容已被密码保护，请输入密码查看。",

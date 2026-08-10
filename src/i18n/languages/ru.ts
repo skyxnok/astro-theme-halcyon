@@ -316,6 +316,36 @@ export const ru: Translation = {
 	[Key.galleryBackToAlbums]: "Вернуться к альбомам",
 	[Key.searchAlbums]: "Поиск альбомов...",
 
+	[Key.sports]: "Спорт",
+	[Key.sportsDescription]: "Записываю свои тренировки",
+	[Key.travel]: "Путешествия",
+	[Key.travelDescription]: "Записываю пейзажи и истории из поездок",
+	[Key.pageComingSoon]: "Контент готовится, следите за обновлениями",
+
+	[Key.sportsTotalSessions]: "Занятий",
+	[Key.sportsTotalDuration]: "Общее время",
+	[Key.sportsTotalDistance]: "Общая дистанция",
+	[Key.sportsTotalCalories]: "Всего калорий",
+	[Key.sportsMinutes]: "мин",
+
+	[Key.sportsSeconds]: "с",
+	[Key.sportsHours]: "ч",
+	[Key.sportsKm]: "км",
+	[Key.sportsKcal]: "ккал",
+	[Key.sportsNoRecords]: "Пока нет записей о тренировках. Пора двигаться!",
+
+	[Key.sportsNoPhotos]: "Пока нет фото",
+	[Key.sportsBack]: "Назад к тренировкам",
+
+	[Key.sportsTrack]: "Маршрут",
+
+	[Key.travelTrips]: "Поездок",
+	[Key.travelTotalDays]: "Всего дней",
+	[Key.travelDays]: "дн.",
+	[Key.travelTrack]: "Маршрут",
+	[Key.travelNoRecords]: "Пока нет поездок. Пора увидеть мир!",
+	[Key.travelBack]: "Назад к путешествиям",
+
 	// Защита паролем
 	[Key.passwordProtected]: "Защищено паролем",
 	[Key.passwordProtectedDesc]:

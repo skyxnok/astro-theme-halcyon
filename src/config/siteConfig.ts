@@ -95,6 +95,10 @@ export const siteConfig: SiteConfig = {
 		bangumi: true,
 		// 相册页面开关
 		gallery: true,
+		// 运动页面开关
+		sports: true,
+		// 旅游页面开关
+		travel: true,
 	},
 
 	// 分类导航栏开关，在首页和归档页顶部显示分类快捷导航

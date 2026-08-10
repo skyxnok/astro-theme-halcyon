@@ -301,6 +301,40 @@ enum I18nKey {
 	galleryBackToAlbums = "galleryBackToAlbums",
 	searchAlbums = "searchAlbums",
 
+	// 运动页面
+	sports = "sports",
+	sportsDescription = "sportsDescription",
+
+	// 旅游页面
+	travel = "travel",
+	travelDescription = "travelDescription",
+
+	// 占位提示
+	pageComingSoon = "pageComingSoon",
+
+	// 运动记录
+	sportsTotalSessions = "sportsTotalSessions",
+	sportsTotalDuration = "sportsTotalDuration",
+	sportsTotalDistance = "sportsTotalDistance",
+	sportsTotalCalories = "sportsTotalCalories",
+	sportsMinutes = "sportsMinutes",
+	sportsSeconds = "sportsSeconds",
+	sportsHours = "sportsHours",
+	sportsKm = "sportsKm",
+	sportsKcal = "sportsKcal",
+	sportsNoRecords = "sportsNoRecords",
+	sportsNoPhotos = "sportsNoPhotos",
+	sportsBack = "sportsBack",
+	sportsTrack = "sportsTrack",
+
+	// 旅行记录
+	travelTrips = "travelTrips",
+	travelTotalDays = "travelTotalDays",
+	travelDays = "travelDays",
+	travelTrack = "travelTrack",
+	travelNoRecords = "travelNoRecords",
+	travelBack = "travelBack",
+
 	// 密码保护
 	passwordProtected = "passwordProtected",
 	passwordProtectedDesc = "passwordProtectedDesc",

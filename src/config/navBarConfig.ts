@@ -50,6 +50,12 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 
 			// 观阅计划
 			LinkPresets.Bangumi,
+
+			// 运动
+			LinkPresets.Sports,
+
+			// 旅游
+			LinkPresets.Travel,
 		],
 	});
 
@@ -129,6 +135,16 @@ export const LinkPresets: Record<string, NavBarLink> = {
 		name: "相册",
 		url: "/gallery/",
 		icon: "material-symbols:photo-library",
+	},
+	Sports: {
+		name: "运动",
+		url: "/sports/",
+		icon: "material-symbols:directions-run",
+	},
+	Travel: {
+		name: "旅游",
+		url: "/travel/",
+		icon: "material-symbols:flight",
 	},
 };
 

@@ -1,0 +1,183 @@
+---
+import { Icon } from "astro-icon/components";
+import { getCollection, render } from "astro:content";
+import fs from "node:fs";
+import path from "node:path";
+import GpxMap from "@/components/pages/shared/GpxMap.astro";
+import PhotoCard from "@/components/pages/shared/PhotoCard.astro";
+import { siteConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import { formatDateI18n } from "@/utils/date-utils";
+import { fmtDurationSec, getTypeIcon } from "@/utils/sports-utils";
+import { url } from "@/utils/url-utils";
+
+// 检查页面是否启用
+if (!siteConfig.pages.sports) {
+	return Astro.redirect("/404/");
+}
+
+export async function getStaticPaths() {
+	const records = await getCollection("sports");
+	return records.map((record) => ({
+		params: { slug: record.id },
+		props: { record },
+	}));
+}
+
+// 扫描该条记录的 GPX 轨迹文件 public/images/sports/<slug>/*.gpx
+function scanSportsGpx(slug: string): string[] {
+	const dir = path.join(process.cwd(), "public", "images", "sports", slug);
+	if (!fs.existsSync(dir)) return [];
+	return fs
+		.readdirSync(dir)
+		.filter((f) => /\.gpx$/i.test(f))
+		.sort()
+		.map((f) => url(`/images/sports/${slug}/${f}`));
+}
+
+// 扫描该条记录的照片目录 public/images/sports/<slug>/（支持 urls.txt 远程图片）
+function scanSportsPhotos(slug: string): string[] {
+	const dir = path.join(process.cwd(), "public", "images", "sports", slug);
+	let local: string[] = [];
+	if (fs.existsSync(dir)) {
+		local = fs
+			.readdirSync(dir)
+			.filter((f) => /\.(jpe?g|png|webp|avif|gif)$/i.test(f))
+			.sort()
+			.map((f) => url(`/images/sports/${slug}/${f}`));
+	}
+	const urlsFile = path.join(dir, "urls.txt");
+	let remote: string[] = [];
+	if (fs.existsSync(urlsFile)) {
+		remote = fs
+			.readFileSync(urlsFile, "utf-8")
+			.split("\n")
+			.map((l) => l.trim())
+			.filter((l) => l && !l.startsWith("#"));
+	}
+	return [...local, ...remote];
+}
+
+const { record } = Astro.props;
+
+if (!record) {
+	return Astro.redirect("/404/");
+}
+
+const { Content: Note } = await render(record);
+const gpxFiles = scanSportsGpx(record.id);
+const photos = scanSportsPhotos(record.id);
+
+const title = `${record.data.type} · ${formatDateI18n(record.data.date)}`;
+const description = i18n(I18nKey.sports);
+---
+
+<MainGridLayout title={title} description={description}>
+  <div class="card-base z-10 px-9 py-6 relative w-full">
+    <!-- 返回链接 -->
+    <a
+      href={url("/sports/")}
+      class="inline-flex items-center gap-1 text-sm text-(--primary) hover:underline mb-5"
+    >
+      <Icon name="material-symbols:arrow-back" class="text-base" />
+      {i18n(I18nKey.sportsBack)}
+    </a>
+
+    <!-- 标题 -->
+    <div class="flex items-center gap-4 mb-5">
+      <div
+        class="h-12 w-12 rounded-xl bg-(--primary) flex items-center justify-center text-white dark:text-black/70 shrink-0"
+      >
+        <Icon name={getTypeIcon(record.data.type)} class="text-[1.75rem]" />
+      </div>
+      <div>
+        <div class="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+          {record.data.type}
+        </div>
+        <div class="text-sm text-(--content-meta) mt-0.5">
+          {formatDateI18n(record.data.date)}
+        </div>
+      </div>
+    </div>
+
+    <!-- 数据标签 -->
+    <div class="flex flex-wrap gap-2 mb-6">
+      {record.data.duration > 0 && (
+        <span
+          class="inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-sm bg-(--btn-regular-bg) text-(--content-meta)"
+        >
+          <Icon name="material-symbols:schedule" class="text-base" />
+          {fmtDurationSec(record.data.duration)}
+        </span>
+      )}
+      {record.data.distance > 0 && (
+        <span
+          class="inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-sm bg-(--btn-regular-bg) text-(--content-meta)"
+        >
+          <Icon name="material-symbols:straighten" class="text-base" />
+          {record.data.distance}{i18n(I18nKey.sportsKm)}
+        </span>
+      )}
+      {record.data.calories > 0 && (
+        <span
+          class="inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-sm bg-(--btn-regular-bg) text-(--content-meta)"
+        >
+          <Icon name="material-symbols:local-fire-department" class="text-base" />
+          {record.data.calories}{i18n(I18nKey.sportsKcal)}
+        </span>
+      )}
+    </div>
+
+    <!-- 备注 -->
+    {record.body?.trim() && (
+      <div class="text-base text-neutral-700 dark:text-neutral-300 leading-relaxed">
+        <Note />
+      </div>
+    )}
+  </div>
+
+  <!-- 运动轨迹 -->
+  {gpxFiles.length > 0 && (
+    <div class="card-base z-10 px-6 py-6 relative w-full mt-4">
+      <div class="flex items-center gap-2 mb-4">
+        <Icon name="material-symbols:route" class="text-xl text-(--primary)" />
+        <span class="font-bold text-neutral-900 dark:text-neutral-100">
+          {i18n(I18nKey.sportsTrack)}
+        </span>
+      </div>
+      <div class="space-y-3">
+        {gpxFiles.map((g) => (
+          <GpxMap gpxUrl={g} />
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- 照片 -->
+  <div class="card-base z-10 px-6 py-6 relative w-full mt-4">
+    <div class="flex items-center gap-2 mb-4">
+      <Icon name="material-symbols:photo-library" class="text-xl text-(--primary)" />
+      <span class="font-bold text-neutral-900 dark:text-neutral-100">
+        {photos.length} {i18n(I18nKey.galleryPhotos)}
+      </span>
+    </div>
+
+    {photos.length > 0 ? (
+      <div class="space-y-3">
+        {photos.map((photo) => (
+          <PhotoCard src={photo} alt={record.data.type} />
+        ))}
+      </div>
+    ) : (
+      <div class="flex flex-col items-center justify-center py-14 text-(--content-meta)">
+        <Icon
+          name="material-symbols:photo-library"
+          class="text-5xl mb-3 opacity-50"
+        />
+        <p class="text-base">{i18n(I18nKey.sportsNoPhotos)}</p>
+      </div>
+    )}
+  </div>
+</MainGridLayout>

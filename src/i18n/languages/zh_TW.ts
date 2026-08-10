@@ -308,6 +308,36 @@ export const zh_TW: Translation = {
 	[Key.galleryBackToAlbums]: "返回相簿列表",
 	[Key.searchAlbums]: "搜尋相簿...",
 
+	[Key.sports]: "運動",
+	[Key.sportsDescription]: "記錄我的運動足跡",
+	[Key.travel]: "旅遊",
+	[Key.travelDescription]: "記錄旅途中的風景與故事",
+	[Key.pageComingSoon]: "內容整理中，敬請期待",
+
+	[Key.sportsTotalSessions]: "總次數",
+	[Key.sportsTotalDuration]: "總時長",
+	[Key.sportsTotalDistance]: "總距離",
+	[Key.sportsTotalCalories]: "總消耗",
+	[Key.sportsMinutes]: "分鐘",
+
+	[Key.sportsSeconds]: "秒",
+	[Key.sportsHours]: "小時",
+	[Key.sportsKm]: "公里",
+	[Key.sportsKcal]: "千卡",
+	[Key.sportsNoRecords]: "暫無運動記錄，去動起來吧！",
+
+	[Key.sportsNoPhotos]: "暫無照片",
+	[Key.sportsBack]: "返回運動記錄",
+
+	[Key.sportsTrack]: "運動軌跡",
+
+	[Key.travelTrips]: "旅行次數",
+	[Key.travelTotalDays]: "累計天數",
+	[Key.travelDays]: "天",
+	[Key.travelTrack]: "旅行軌跡",
+	[Key.travelNoRecords]: "暫無旅行記錄，去看看世界吧！",
+	[Key.travelBack]: "返回旅行記錄",
+
 	// 密碼保護
 	[Key.passwordProtected]: "密碼保護",
 	[Key.passwordProtectedDesc]: "此內容已被密碼保護，請輸入密碼查看。",

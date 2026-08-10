@@ -314,6 +314,36 @@ export const ja: Translation = {
 	[Key.galleryBackToAlbums]: "アルバム一覧に戻る",
 	[Key.searchAlbums]: "アルバムを検索...",
 
+	[Key.sports]: "スポーツ",
+	[Key.sportsDescription]: "運動の記録",
+	[Key.travel]: "旅行",
+	[Key.travelDescription]: "旅の風景と物語を記録する",
+	[Key.pageComingSoon]: "コンテンツ準備中です。お楽しみに",
+
+	[Key.sportsTotalSessions]: "総回数",
+	[Key.sportsTotalDuration]: "合計時間",
+	[Key.sportsTotalDistance]: "合計距離",
+	[Key.sportsTotalCalories]: "合計消費",
+	[Key.sportsMinutes]: "分",
+
+	[Key.sportsSeconds]: "秒",
+	[Key.sportsHours]: "時間",
+	[Key.sportsKm]: "km",
+	[Key.sportsKcal]: "kcal",
+	[Key.sportsNoRecords]: "スポーツ記録はまだありません。体を動かそう！",
+
+	[Key.sportsNoPhotos]: "写真はまだありません",
+	[Key.sportsBack]: "スポーツ記録に戻る",
+
+	[Key.sportsTrack]: "ルート",
+
+	[Key.travelTrips]: "旅行回数",
+	[Key.travelTotalDays]: "合計日数",
+	[Key.travelDays]: "日",
+	[Key.travelTrack]: "旅行ルート",
+	[Key.travelNoRecords]: "旅行記録はまだありません。世界を見に行こう！",
+	[Key.travelBack]: "旅行記録に戻る",
+
 	// パスワード保護
 	[Key.passwordProtected]: "パスワード保護",
 	[Key.passwordProtectedDesc]:

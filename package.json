@@ -6,7 +6,7 @@
 		"dev": "astro dev",
 		"start": "astro dev",
 		"check": "astro check",
-		"build": "node scripts/auto-cover.js && node scripts/sync-friend-avatars.js && node scripts/generate-icons.js && npx tsx scripts/generate-lqips.ts && astro build && pagefind --site dist",
+		"build": "node scripts/auto-cover.js && node scripts/sync-friend-avatars.js && node scripts/optimize-record-images.js && node scripts/generate-icons.js && npx tsx scripts/generate-lqips.ts && astro build && pagefind --site dist",
 		"build:cf": "BUILD_PLATFORM=\"Cloudflare Workers\" pnpm build && wrangler deploy",
 		"preview": "astro preview",
 		"astro": "astro",
@@ -17,7 +17,8 @@
 		"preinstall": "npx only-allow pnpm",
 		"icons": "node scripts/generate-icons.js",
 		"lqips": "npx tsx scripts/generate-lqips.ts",
-		"covers": "node scripts/auto-cover.js"
+		"covers": "node scripts/auto-cover.js",
+		"optimize:images": "node scripts/optimize-record-images.js"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.10",
@@ -52,6 +53,7 @@
 		"glob": "^11.1.0",
 		"hastscript": "^9.0.1",
 		"katex": "^0.17.0",
+		"leaflet": "^1.9.4",
 		"mdast-util-to-string": "^4.0.0",
 		"pagefind": "^1.5.2",
 		"pako": "^2.1.0",
@@ -83,6 +85,7 @@
 		"@iconify-json/svg-spinners": "^1.2.4",
 		"@tailwindcss/vite": "^4.3.0",
 		"@types/hast": "^3.0.4",
+		"@types/leaflet": "^1.9.22",
 		"@types/mdast": "^4.0.4",
 		"@types/qrcode": "^1.5.6",
 		"@types/sanitize-html": "^2.16.1",
