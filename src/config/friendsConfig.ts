@@ -55,6 +55,10 @@ export const friendsPageConfig: FriendsPageConfig = {
 
   // 申请表单提交接口（POST JSON），留空则使用邮件发送
   apiEndpoint: "",
+
+  // 友链数据远程 JSON（独立仓库，经 data.201562.xyz Worker 代理）
+  // 页面运行时从这里加载，请求失败自动回退下方本地配置；留空则只用本地配置
+  dataUrl: "https://data.201562.xyz/friends.json",
 };
 
 // 友链配置：在这里添加你的友链
@@ -184,7 +188,7 @@ export const friendsConfig: FriendLink[] = [
     title: "Fqzlr Blog", // 博客名称
     siteurl: "https://fqzlr.com/", // 博客地址
     desc: "躬身入局，心为主理，行有尺度，自持本心.", // 博客描述
-    imgurl: "https://q1.qlogo.cn/g?b=qq&nk=20447289&s=640", // 博客头像
+    imgurl: "/images/friends/fqzlr-blog.gif", // 博客头像
     tags: ["Blog"],
     weight: 8,
     enabled: true,

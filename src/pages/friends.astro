@@ -51,6 +51,8 @@ const siteInfo = friendsPageConfig.site ?? {
 };
 const notes = friendsPageConfig.notes ?? [];
 const apiEndpoint = friendsPageConfig.apiEndpoint || "";
+const friendsDataUrl = friendsPageConfig.dataUrl || "";
+const friendsInvalidLabel = i18n(I18nKey.friendsInvalid);
 const siteEmail = siteInfo.email || "";
 
 const escapedSiteName = (siteInfo.name || "").replace(/'/g, "\\'");
@@ -148,8 +150,13 @@ const copyAllOnClick = `navigator.clipboard.writeText('站点名称：${escapedS
                 <img
                   src={item.imgurl}
                   alt={item.title}
-                  class="w-full h-full object-cover"
+                  class={'w-full h-full object-cover' + (item.invalid ? ' grayscale' : '')}
                 />
+                {item.invalid && (
+                  <span class="absolute top-1 right-1 z-10 text-[0.6rem] px-1.5 py-0.5 rounded-full bg-red-500 text-white font-medium shadow">
+                    {i18n(I18nKey.friendsInvalid)}
+                  </span>
+                )}
               </div>
 
               {/* 内容 */}
@@ -592,4 +599,103 @@ const copyAllOnClick = `navigator.clipboard.writeText('站点名称：${escapedS
       opacity: 0;
     }
   </style>
+
+  <script is:inline define:vars={{ friendsDataUrl, friendsInvalidLabel }}>
+    // 远程友链加载：从独立仓库 JSON 拉取，失败自动回退本地静态渲染
+    function escapeHtml(str) {
+      return String(str || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
+    function friendCardHTML(item, origin) {
+      var img = item.imgurl && item.imgurl.startsWith("/") ? origin + item.imgurl : (item.imgurl || "");
+      var invalidBadge = item.invalid
+        ? '<span class="absolute top-1 right-1 z-10 text-[0.6rem] px-1.5 py-0.5 rounded-full bg-red-500 text-white font-medium shadow">' + escapeHtml(friendsInvalidLabel) + "</span>"
+        : "";
+      var tags = (item.tags || []).slice(0, 3).map(function (t) {
+        return '<span class="text-[0.65rem] px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 transition-colors duration-300">' + escapeHtml(t) + "</span>";
+      }).join("");
+      return (
+        '<a href="' + escapeHtml(item.siteurl) + '" target="_blank" rel="noopener noreferrer" data-tags="' + escapeHtml((item.tags || []).join(",")) + '" ' +
+        'class="friend-card group flex items-center gap-3 p-2.5 rounded-xl border border-(--line-divider) hover:border-(--primary) hover:bg-(--card-bg) transition-all duration-300 hover:shadow-lg relative overflow-hidden">' +
+          '<div class="absolute inset-0 bg-(--primary) opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none"></div>' +
+          '<div class="relative w-16 h-16 shrink-0 rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-black/5 dark:border-white/5 group-hover:scale-105 transition-transform duration-300">' +
+            '<img src="' + escapeHtml(img) + '" alt="' + escapeHtml(item.title) + '" class="w-full h-full object-cover' + (item.invalid ? " grayscale" : "") + '" />' +
+            invalidBadge +
+          "</div>" +
+          '<div class="grow min-w-0 flex flex-col justify-center gap-0.5">' +
+            '<div class="flex items-center justify-between">' +
+              '<div class="font-bold text-base text-neutral-900 dark:text-neutral-100 group-hover:text-(--primary) transition-colors truncate pr-4">' + escapeHtml(item.title) + "</div>" +
+              '<svg class="text-(--primary) text-lg opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor"><path d="M6.4 18L5 16.6L14.6 7H6V5h12v12h-2V8.4L6.4 18z"/></svg>' +
+            "</div>" +
+            '<div class="text-sm text-neutral-500 dark:text-neutral-400 line-clamp-1" title="' + escapeHtml(item.desc) + '">' + escapeHtml(item.desc) + "</div>" +
+            '<div class="flex flex-wrap gap-1 mt-1">' + tags + "</div>" +
+          "</div>" +
+        "</a>"
+      );
+    }
+
+    async function loadRemoteFriends() {
+      var grid = document.querySelector(".friends-grid");
+      if (!grid || grid.dataset.remoteLoaded) return;
+      grid.dataset.remoteLoaded = "1";
+      if (!friendsDataUrl) return;
+
+      try {
+        var res = await fetch(friendsDataUrl, { cache: "no-cache" });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        var data = await res.json();
+        var items = Array.isArray(data) ? data : data.friends;
+        if (!Array.isArray(items) || items.length === 0) return;
+
+        var origin = new URL(friendsDataUrl).origin;
+        var sorted = items
+          .filter(function (i) { return i.enabled !== false; })
+          .sort(function (a, b) { return (b.weight || 0) - (a.weight || 0); });
+
+        // 重建友链卡片
+        grid.innerHTML = sorted.map(function (i) { return friendCardHTML(i, origin); }).join("");
+
+        // 重建标签筛选按钮
+        var filter = document.querySelector("friend-filter");
+        var tagRow = filter ? filter.querySelector(".flex.flex-wrap") : null;
+        if (tagRow) {
+          var tags = Array.from(new Set(sorted.flatMap(function (i) { return i.tags || []; }))).sort();
+          var allBtn = '<button data-tag="all" class="btn-regular px-3 py-1.5 rounded-lg bg-(--primary) text-white hover:bg-(--primary) transition-colors duration-200 text-sm font-medium">全部</button>';
+          tagRow.innerHTML = allBtn + tags.map(function (t) {
+            return '<button data-tag="' + escapeHtml(t) + '" class="btn-regular px-3 py-1.5 rounded-lg bg-(--btn-regular-bg) text-(--btn-content) hover:bg-(--btn-regular-bg-hover) transition-colors duration-200 text-sm font-medium">' + escapeHtml(t) + "</button>";
+          }).join("");
+        }
+
+        // 恢复当前选中标签按钮的高亮样式
+        var selectedTag = filter && filter.selectedTag ? filter.selectedTag : "all";
+        if (tagRow) {
+          tagRow.querySelectorAll("button").forEach(function (btn) {
+            var isActive = btn.dataset.tag === selectedTag;
+            btn.classList.toggle("bg-(--primary)", isActive);
+            btn.classList.toggle("text-white", isActive);
+            btn.classList.toggle("bg-(--btn-regular-bg)", !isActive);
+            btn.classList.toggle("text-(--btn-content)", !isActive);
+          });
+        }
+
+        // 重新应用当前筛选
+        if (filter && typeof filter.applyFilters === "function") {
+          filter.applyFilters();
+        }
+      } catch (e) {
+        console.warn("友链远程加载失败，使用本地配置:", e);
+      }
+    }
+
+    function initRemoteFriends() {
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", loadRemoteFriends);
+      } else {
+        loadRemoteFriends();
+      }
+    }
+    initRemoteFriends();
+    document.addEventListener("astro:page-load", loadRemoteFriends);
+    document.addEventListener("swup:content:replace", initRemoteFriends);
+  </script>
 </MainGridLayout>

@@ -55,6 +55,7 @@ enum I18nKey {
 	friends = "friends",
 	friendsDescription = "friendsDescription",
 	searchFriends = "searchFriends",
+	friendsInvalid = "friendsInvalid",
 	friendsEmpty = "friendsEmpty",
 	guestbook = "guestbook",
 	guestbookDescription = "guestbookDescription",

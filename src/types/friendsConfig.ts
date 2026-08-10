@@ -27,4 +27,6 @@ export type FriendsPageConfig = {
 	notes?: Array<{ title: string; content: string }>;
 	// 申请表单提交接口（POST JSON），留空则使用邮件发送
 	apiEndpoint?: string;
+	// 友链数据远程 JSON 地址（独立仓库），设置后页面运行时从这里加载，加载失败回退本地配置
+	dataUrl?: string;
 };

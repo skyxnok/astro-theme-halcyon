@@ -34,6 +34,8 @@ export const ja: Translation = {
 	[Key.friendsDescription]:
 		"ここは私の友達です、お互いに訪問して交流することを歓迎します",
 	[Key.searchFriends]: "友達を検索...",
+
+	[Key.friendsInvalid]: "無効",
 	[Key.friendsEmpty]: "まだ友達がいません",
 	[Key.guestbook]: "ゲストブック",
 	[Key.guestbookDescription]:

@@ -34,6 +34,8 @@ export const en: Translation = {
 	[Key.friendsDescription]:
 		"Here are my friends, welcome to visit and communicate with each other",
 	[Key.searchFriends]: "Search friends...",
+
+	[Key.friendsInvalid]: "Invalid",
 	[Key.friendsEmpty]: "No friends yet.",
 	[Key.guestbook]: "Guestbook",
 	[Key.guestbookDescription]:
