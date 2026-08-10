@@ -7,6 +7,7 @@ export type FriendLink = {
 	tags?: string[]; // 标签数组
 	weight: number; // 权重，数字越大排序越靠前
 	enabled: boolean; // 是否启用
+	invalid?: boolean; // 是否失效（由可用性检测标记）
 };
 
 export type FriendsPageConfig = {

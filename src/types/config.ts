@@ -19,7 +19,7 @@ export type {
 	NavBarSearchMethod,
 } from "./navBarConfig";
 export type { PlantUMLConfig } from "./plantumlConfig";
-export type { WeatherConfig } from "./weatherConfig";
+export type { WeatherConfig } from "../config/weatherConfig";
 export type { ProfileConfig } from "./profileConfig";
 export type {
 	CalendarConfig,
