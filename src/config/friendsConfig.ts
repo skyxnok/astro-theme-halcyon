@@ -164,6 +164,22 @@ export const friendsConfig: FriendLink[] = [
     tags: ["Blog"],
     weight: 8,
     enabled: true,
+  },{
+    title: "年华", // 博客名称
+    siteurl: "https://blog.amamo.top", // 博客地址
+    desc: "分享生活和技术。", // 博客描述
+    imgurl: "/images/friends/q1-qlogo-cn.avif", // 博客头像
+    tags: ["Blog"],
+    weight: 8,
+    enabled: true,
+  },{
+    title: "Olinl Blog", // 博客名称
+    siteurl: "https://blog.olinl.com", // 博客地址
+    desc: "分享、实践、学习。", // 博客描述
+    imgurl: "/images/friends/olinl-blog.avif", // 博客头像
+    tags: ["Blog"],
+    weight: 8,
+    enabled: true,
   },
 
 ];
