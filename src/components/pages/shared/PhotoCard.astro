@@ -12,15 +12,16 @@ const { src, alt = "" } = Astro.props;
 const lqipProps = getLqipProps(src, undefined, true);
 ---
 
-<div>
-  <div class="block rounded-xl overflow-hidden relative">
+<div class="break-inside-avoid mb-4">
+  <a href={src} target="_blank" class="block rounded-xl overflow-hidden relative group cursor-pointer">
     <div class="lqip-placeholder absolute inset-0 pointer-events-none" style={lqipProps.style} aria-hidden="true"></div>
     <img
       src={src}
       alt={alt}
       loading="lazy"
       decoding="async"
-      class="w-full h-auto opacity-0 transition-all duration-500 ease-out"
+      class="w-full h-auto opacity-0 transition-all duration-500 ease-out group-hover:scale-105 group-hover:shadow-lg"
     />
-  </div>
+    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 rounded-xl"></div>
+  </a>
 </div>

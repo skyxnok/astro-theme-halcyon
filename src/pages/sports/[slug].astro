@@ -5,6 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 import GpxMap from "@/components/pages/shared/GpxMap.astro";
 import PhotoCard from "@/components/pages/shared/PhotoCard.astro";
+import Markdown from "@/components/common/Markdown.astro";
 import { siteConfig } from "@/config";
 import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
@@ -132,9 +133,9 @@ const description = i18n(I18nKey.sports);
 
     <!-- 备注 -->
     {record.body?.trim() && (
-      <div class="text-base text-neutral-700 dark:text-neutral-300 leading-relaxed">
+      <Markdown class="mb-6">
         <Note />
-      </div>
+      </Markdown>
     )}
   </div>
 
@@ -165,7 +166,7 @@ const description = i18n(I18nKey.sports);
     </div>
 
     {photos.length > 0 ? (
-      <div class="space-y-3">
+      <div class="columns-2 md:columns-3 gap-4">
         {photos.map((photo) => (
           <PhotoCard src={photo} alt={record.data.type} />
         ))}
