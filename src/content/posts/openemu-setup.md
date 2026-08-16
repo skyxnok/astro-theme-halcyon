@@ -6,6 +6,7 @@ description: 用 OpenEmu 在 Mac 上一站式玩转 NES、GBA、PS1、NDS 等 25
 tags: [Mac, 教程, 游戏]
 category: 教程
 draft: false
+image: /images/covers/openemu-setup.avif
 ---
 
 OpenEmu 是 macOS 上最流行的免费开源复古游戏模拟器：把 NES、SNES、GBA、NDS、PS1、N64、GameCube 等 25+ 平台的老游戏统一收进一个「类 iTunes」的游戏库里，拖入 ROM 自动识别平台、自动下载封面，开箱即用。
