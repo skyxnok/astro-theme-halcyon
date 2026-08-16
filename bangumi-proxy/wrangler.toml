@@ -1,7 +1,0 @@
-name = "bangumi-proxy"
-main = "worker.js"
-compatibility_date = "2026-06-01"
-
-routes = [
-  { pattern = "shyxnok.dpdns.org", custom_domain = true },
-]
