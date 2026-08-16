@@ -75,9 +75,21 @@ function getFilterLabel(type: "collect" | "doing" | "wish"): string {
 	}
 }
 
+// 防御性去重：上游数据（豆瓣分页）可能出现重复 subject_id，键控 each 会崩溃
+const uniqueItems = $derived(() => {
+	const seen = new Set<number>();
+	const result: UserSubjectCollection[] = [];
+	for (const item of items) {
+		if (seen.has(item.subject_id)) continue;
+		seen.add(item.subject_id);
+		result.push(item);
+	}
+	return result;
+});
+
 const statusCounts = $derived(() => {
 	const counts: Record<string, number> = {};
-	for (const item of items) {
+	for (const item of uniqueItems()) {
 		const status =
 			STATUS_MAP[item.type as keyof typeof STATUS_MAP] || "unknown";
 		counts[status] = (counts[status] || 0) + 1;
@@ -91,7 +103,7 @@ const filters = $derived(() => {
 		{
 			value: "all",
 			label: i18n(I18nKey.bangumiFilterAll),
-			count: items.length,
+			count: uniqueItems().length,
 		},
 		{
 			value: "collect",
@@ -122,8 +134,8 @@ let currentPage = $state(1);
 
 const filteredItems = $derived(
 	activeFilter === "all"
-		? items
-		: items.filter(
+		? uniqueItems()
+		: uniqueItems().filter(
 				(item) =>
 					(STATUS_MAP[item.type as keyof typeof STATUS_MAP] || "unknown") ===
 					activeFilter,
